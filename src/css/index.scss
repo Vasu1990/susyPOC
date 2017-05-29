@@ -1,0 +1,53 @@
+@import "~susy/sass/susy";
+$susy: (
+    flow: ltr, 
+    output: float,
+    math: fluid,
+    container: 900px,
+    container-position: center,
+    last-flow: to,
+    columns: 12, 
+    gutters: 1/4,
+    gutter-position: inside,
+    global-box-sizing: content-box,
+    debug: (image: show, color: rgba(#66f, .25),
+    output: background,
+    toggle: top right)
+);
+
+.wrapper {
+    @include container;
+    @include show-grid(overlay);
+    
+    .sidebar {
+        @include span(12);
+        @include susy-breakpoint(720px ,12) {
+            @include span(3);
+        }
+    }
+
+    .main-content {
+        
+        @include span(9);
+
+        .other-content {
+            @include layout(2 0 float fluid);
+            .other-content-1 {
+                @include span(1 of 2);
+                background-color: lightgrey;
+            }
+            .other-content-2 {
+                background-color: lightblue;
+                @include span(1 of 2);
+            }
+        }
+        .product {
+            @include span(3 of 9);
+        }   
+    }
+
+}
+
+
+
+
