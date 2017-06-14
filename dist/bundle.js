@@ -7706,8 +7706,8 @@ function getProductPrice(product) {
 }
 
 function getNextProduct() {
-    return function (dispatch) {
-        var product = store.getState().cartProductCombinedReducer.cartProductsReducer.cartProduct;
+    return function (dispatch, getState) {
+        var product = getState().cartProductCombinedReducer.cartProductsReducer.cartProduct;
 
         _axios2.default.get("../../public/data/product-detail.json?id=" + product.productId + 1).then(function (res) {
             var apiProduct = res.data.product || {};
@@ -7781,8 +7781,8 @@ function createGlobalStore() {
       store = window.store;
     }
   } else {
-    // for server      
-    store = (0, _redux.createStore)(_main2.default, data);
+    // for server   
+    store = (0, _redux.createStore)(_main2.default, data, (0, _redux.applyMiddleware)(_reduxThunk2.default));
   }
 
   return store;
@@ -12196,7 +12196,6 @@ var canUseDOM = typeof window !== 'undefined' && window.document && window.docum
 
 if (canUseDOM) {
 	if (document.getElementById('product-detail').length !== null) {
-
 		_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, null), document.getElementById('product-detail'));
 	}
 }
@@ -13243,18 +13242,25 @@ var ProductDetailWrapper = function (_Component) {
       _inherits(ProductDetailWrapper, _Component);
 
       function ProductDetailWrapper() {
+            var _ref;
+
+            var _temp, _this, _ret;
+
             _classCallCheck(this, ProductDetailWrapper);
 
-            return _possibleConstructorReturn(this, (ProductDetailWrapper.__proto__ || Object.getPrototypeOf(ProductDetailWrapper)).apply(this, arguments));
+            for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+                  args[_key] = arguments[_key];
+            }
+
+            return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ProductDetailWrapper.__proto__ || Object.getPrototypeOf(ProductDetailWrapper)).call.apply(_ref, [this].concat(args))), _this), _this.store = (0, _store.createGlobalStore)(_this.props.data), _temp), _possibleConstructorReturn(_this, _ret);
       }
 
       _createClass(ProductDetailWrapper, [{
             key: 'render',
             value: function render() {
-                  var store = (0, _store.createGlobalStore)(this.props.data);
                   return _react2.default.createElement(
                         _reactRedux.Provider,
-                        { store: store },
+                        { store: this.store },
                         _react2.default.createElement(_CartProduct2.default, null)
                   );
             }
