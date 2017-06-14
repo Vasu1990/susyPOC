@@ -15,9 +15,16 @@ export function getProductPrice(product) {
 
 export function getNextProduct() {
    return function(dispatch) {
-        axios.get("../../public/data/product-detail.json")
+        let product = store.getState().cartProductCombinedReducer.cartProductsReducer.cartProduct; 
+       
+        axios.get("../../public/data/product-detail.json?id=" + product.productId + 1)
         .then(res => {
-            	dispatch({type:LOAD_PRODUCT , payload:res.data});
+                let apiProduct = res.data.product || {};
+                 axios.get("../../public/data/product-price.json?id=" + apiProduct.productId)
+                .then(res => {
+                            apiProduct.productPrice = res.data.productPrice || 0;
+                        	dispatch({type:LOAD_PRODUCT , payload:apiProduct});
+                })
         })
     }
 }

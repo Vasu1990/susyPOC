@@ -14,13 +14,13 @@ export function createGlobalStore(data = {}) {
               store = window.store;
           } else {
             window.store = createStore(combinedReducers, window.app , applyMiddleware(thunk));
-             store = window.store;
+            store = window.store;
          }
      
-  }else {
-    // for server      
+  }else {  
+   // for server      
         store = createStore(combinedReducers, data);
-  }
+   }
   
     return store;
 }

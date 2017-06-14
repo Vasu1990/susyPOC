@@ -7707,8 +7707,14 @@ function getProductPrice(product) {
 
 function getNextProduct() {
     return function (dispatch) {
-        _axios2.default.get("../../public/data/product-detail.json").then(function (res) {
-            dispatch({ type: LOAD_PRODUCT, payload: res.data });
+        var product = store.getState().cartProductCombinedReducer.cartProductsReducer.cartProduct;
+
+        _axios2.default.get("../../public/data/product-detail.json?id=" + product.productId + 1).then(function (res) {
+            var apiProduct = res.data.product || {};
+            _axios2.default.get("../../public/data/product-price.json?id=" + apiProduct.productId).then(function (res) {
+                apiProduct.productPrice = res.data.productPrice || 0;
+                dispatch({ type: LOAD_PRODUCT, payload: apiProduct });
+            });
         });
     };
 }
@@ -12189,10 +12195,25 @@ __webpack_require__(135); // import these files from their respective folders
 var canUseDOM = typeof window !== 'undefined' && window.document && window.document.createElement;
 
 if (canUseDOM) {
-	if (document.getElementById('product-detail').length !== null) {
-
-		_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, null), document.getElementById('product-detail'));
-	}
+  if (document.getElementById('product-detail').length !== null) {
+    var tempData = { cartProductCombinedReducer: {
+        cartProductsReducer: {
+          labels: {
+            productName: "Product Name",
+            productPrice: "Product Price",
+            productId: "Id",
+            title: "This is  product detail"
+          },
+          cartProduct: {
+            productName: "Hero Cycles",
+            productImage: "https://images.apple.com/uk/pr/products/images/iPhone6_34FR_SpGry_iPhone6plus_34FL_SpGry_Homescreen_HERO.jpg",
+            productId: 1,
+            productPrice: 0
+          }
+        }
+      } };
+    _reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, { data: tempData }), document.getElementById('product-detail'));
+  }
 }
 
 /***/ }),
@@ -13245,7 +13266,11 @@ var ProductDetailWrapper = function (_Component) {
       _createClass(ProductDetailWrapper, [{
             key: 'render',
             value: function render() {
-                  var store = (0, _store.createGlobalStore)();
+                  var data = void 0;
+                  if (this.props.data) {
+                        data = this.props.data;
+                  }
+                  var store = (0, _store.createGlobalStore)(data);
                   return _react2.default.createElement(
                         _reactRedux.Provider,
                         { store: store },
@@ -13267,7 +13292,7 @@ exports.default = ProductDetailWrapper;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+   value: true
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -13277,56 +13302,31 @@ var _redux = __webpack_require__(22);
 var _cartProductActions = __webpack_require__(64);
 
 function cartProductsReducer() {
-  var cartProductData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-    labels: {
-      productName: "",
-      productPrice: "",
-      productId: "",
-      title: ""
-    },
-    cartProduct: {
-      productImage: "",
-      productName: "",
-      productId: 0,
-      productPrice: 0
-    } };
-  var action = arguments[1];
+   var cartProductData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+      labels: {
+         productName: "",
+         productPrice: "",
+         productId: "",
+         title: ""
+      },
+      cartProduct: {
+         productImage: "",
+         productName: "",
+         productId: 0,
+         productPrice: 0
+      } };
+   var action = arguments[1];
 
-  switch (action.type) {
+   switch (action.type) {
 
-    case _cartProductActions.LOAD_PRICE:
-      //    let cartItems = [...cartProductData.cartProducts];
+      case _cartProductActions.LOAD_PRODUCT:
+         cartProductData.cartProduct = action.payload;
+         return _extends({}, cartProductData);
 
-      //     cartItems.forEach(function(product) {
-      //         action.payload.forEach(function(item) {
-      //             if(product.productId == item.id) {
-      //                 product.productPrice = item.price
-      //             }
-      //         }, this);
-      //     }, this);
-      //     cartProductData.cartProducts = cartItems;
-
-      return _extends({}, cartProductData);
-
-    case _cartProductActions.LOAD_PRODUCT:
-      console.log(action.payload);
-      console.log(cartProductData.cartProduct, "reducer data");
-      var data = void 0;
-      action.payload.product.forEach(function (item) {
-        if (cartProductData.cartProduct.productId + 1 == item.productId) {
-          data = item;
-          return;
-        }
-      }, this);
-
-      cartProductData.cartProduct = data;
-      return _extends({}, cartProductData);
-
-    default:
-      return _extends({}, cartProductData);
-  }
+      default:
+         return _extends({}, cartProductData);
+   }
 }
-
 var cartProductCombinedReducer = (0, _redux.combineReducers)({ cartProductsReducer: cartProductsReducer });
 
 exports.default = cartProductCombinedReducer;
