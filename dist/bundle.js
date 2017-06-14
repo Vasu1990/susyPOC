@@ -7709,7 +7709,7 @@ function getNextProduct() {
     return function (dispatch, getState) {
         var product = getState().cartProductCombinedReducer.cartProductsReducer.cartProduct;
 
-        _axios2.default.get("../../public/data/product-detail.json?id=" + product.productId + 1).then(function (res) {
+        _axios2.default.get(window.apiUrl.productDetail + "?id=" + parseInt(product.productId + 1)).then(function (res) {
             var apiProduct = res.data.product || {};
             _axios2.default.get("../../public/data/product-price.json?id=" + apiProduct.productId).then(function (res) {
                 apiProduct.productPrice = res.data.productPrice || 0;
