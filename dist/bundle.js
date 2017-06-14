@@ -12196,6 +12196,7 @@ var canUseDOM = typeof window !== 'undefined' && window.document && window.docum
 
 if (canUseDOM) {
 	if (document.getElementById('product-detail').length !== null) {
+
 		_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, null), document.getElementById('product-detail'));
 	}
 }
