@@ -12195,25 +12195,10 @@ __webpack_require__(135); // import these files from their respective folders
 var canUseDOM = typeof window !== 'undefined' && window.document && window.document.createElement;
 
 if (canUseDOM) {
-  if (document.getElementById('product-detail').length !== null) {
-    var tempData = { cartProductCombinedReducer: {
-        cartProductsReducer: {
-          labels: {
-            productName: "Product Name",
-            productPrice: "Product Price",
-            productId: "Id",
-            title: "This is  product detail"
-          },
-          cartProduct: {
-            productName: "Hero Cycles",
-            productImage: "https://images.apple.com/uk/pr/products/images/iPhone6_34FR_SpGry_iPhone6plus_34FL_SpGry_Homescreen_HERO.jpg",
-            productId: 1,
-            productPrice: 0
-          }
-        }
-      } };
-    _reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, { data: tempData }), document.getElementById('product-detail'));
-  }
+	if (document.getElementById('product-detail').length !== null) {
+
+		_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, null), document.getElementById('product-detail'));
+	}
 }
 
 /***/ }),
@@ -13266,11 +13251,7 @@ var ProductDetailWrapper = function (_Component) {
       _createClass(ProductDetailWrapper, [{
             key: 'render',
             value: function render() {
-                  var data = void 0;
-                  if (this.props.data) {
-                        data = this.props.data;
-                  }
-                  var store = (0, _store.createGlobalStore)(data);
+                  var store = (0, _store.createGlobalStore)(this.props.data);
                   return _react2.default.createElement(
                         _reactRedux.Provider,
                         { store: store },

@@ -8,7 +8,6 @@ import combinedReducers  from '../../reducers/ContainerReducer/main';
 
 
 export default class ProductDetailWrapper extends Component {
-      
       render() {
             let store = createGlobalStore(this.props.data);
             return (

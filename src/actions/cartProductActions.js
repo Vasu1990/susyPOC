@@ -14,8 +14,8 @@ export function getProductPrice(product) {
 }
 
 export function getNextProduct() {
-   return function(dispatch) {
-        let product = store.getState().cartProductCombinedReducer.cartProductsReducer.cartProduct; 
+   return function(dispatch , getState) {
+        let product = getState().cartProductCombinedReducer.cartProductsReducer.cartProduct; 
        
         axios.get("../../public/data/product-detail.json?id=" + product.productId + 1)
         .then(res => {

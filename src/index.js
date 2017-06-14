@@ -10,7 +10,6 @@ var canUseDOM = typeof window !== 'undefined' && window.document && window.docum
 
 if(canUseDOM) {
 	if(document.getElementById('product-detail').length!==null) {
-		
 		ReactDOM.render(
 			<serverComponents.ProductDetail/>,
 		document.getElementById('product-detail')); 
