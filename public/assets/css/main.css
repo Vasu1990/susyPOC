@@ -1,0 +1,16 @@
+img {
+    width: 200px;
+    height: 200px;
+}
+
+.cart-products {
+    width: 25%;
+    margin: 0 auto;
+    border: 1px solid;
+    list-style: none;
+}
+
+.next-button {
+    margin: 20px auto;
+    display: block;
+}

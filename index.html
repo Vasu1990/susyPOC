@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    
+    <!--<link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">-->
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CarParts - Responsive Ecommerce Template</title>
+        <meta name="description" content="CarParts - A Responsive eCommerce Template specially for car and electronic parts eCommerce site">
+
+        <!-- Custom CSS -->
+        <!--<link rel="stylesheet" href="assets/css/style.css">-->
+        <link rel="stylesheet" href="public/assets/css/main.css">
+
+    <title>React App</title>
+
+  </head>
+  <body>
+     
+    <!--react component-->
+    <div id="product-detail"></div>
+
+<script>
+        window.app = { 
+
+              cartProductCombinedReducer: {
+                cartProductsReducer: {
+                  labels : {
+                     productName : "Product Name",
+                     productPrice: "Product Price",
+                     productId : "Id",
+                     title : "This is  product detail"
+                  },
+                  cartProduct : {
+                      productName : "Hero Cycles",
+                      productImage : "https://images.apple.com/uk/pr/products/images/iPhone6_34FR_SpGry_iPhone6plus_34FL_SpGry_Homescreen_HERO.jpg",
+                      productId :  1 ,
+                      productPrice :  0
+                    }
+                }
+              }          
+        };
+</script>
+<script src="dist/bundle.js"></script>
+    
+  </body>
+ 
+</html>
