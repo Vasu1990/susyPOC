@@ -40,7 +40,7 @@ if(canUseDOM) {
 
    cartProductCombinedReducer = combineReducers(reducerObj);
 }else {
-  cartProductCombinedReducer = combineReducers({cartProductsReducer : cartProductsReducer(cartProductsReducer)});
+  cartProductCombinedReducer = combineReducers({cartProductsReducer : cartProductsReducer("cartProductsReducer")});
 }
 
 export default cartProductCombinedReducer;

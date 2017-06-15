@@ -12202,10 +12202,8 @@ if (canUseDOM) {
 
 	if (mappedData.cartProductCombinedReducer) {
 		for (var reducerKey in window.app.cartProductCombinedReducer) {
-			var componentData = {
-				namespace: reducerKey
-			};
-			_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, { data: componentData }), document.getElementById(reducerKey));
+
+			_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, { namespace: reducerKey }), document.getElementById(reducerKey));
 		}
 	}
 
@@ -12218,11 +12216,7 @@ if (canUseDOM) {
 		}
 	}
 } else {
-
-	var componentData = {
-		namespace: "cartProductsReducer"
-	};
-	_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, { data: componentData }), document.getElementById("cartProductsReducer"));
+	_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, { data: window.app }), document.getElementById("cartProductsReducer"));
 }
 
 /***/ }),
@@ -13220,18 +13214,26 @@ var CartProduct = function (_Component) {
     return CartProduct;
 }(_react.Component);
 
+var canUseDOM = typeof window !== 'undefined' && window.document && window.document.createElement;
+var namespace;
 var mapStateToProps = function mapStateToProps(state, ownProps) {
+    if (canUseDOM) {
+        namespace = ownProps.namespace;
+    } else {
+        namespace = "cartProductsReducer";
+    }
     console.log(state, "product detail state");
     return {
-        productDetail: state.cartProductCombinedReducer[ownProps.namespace].cartProduct,
-        labels: state.cartProductCombinedReducer[ownProps.namespace].labels
+        productDetail: state.cartProductCombinedReducer[namespace].cartProduct,
+        labels: state.cartProductCombinedReducer[namespace].labels
     };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+
     return {
         fetchProduct: function fetchProduct() {
-            return dispatch((0, _cartProductActions.getNextProduct)(ownProps.namespace));
+            return dispatch((0, _cartProductActions.getNextProduct)(namespace));
         }
     };
 };
@@ -13335,16 +13337,19 @@ var ProductDetailWrapper = function (_Component) {
                   args[_key] = arguments[_key];
             }
 
-            return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ProductDetailWrapper.__proto__ || Object.getPrototypeOf(ProductDetailWrapper)).call.apply(_ref, [this].concat(args))), _this), _this.store = (0, _store.createGlobalStore)(_this.props.data), _temp), _possibleConstructorReturn(_this, _ret);
+            return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ProductDetailWrapper.__proto__ || Object.getPrototypeOf(ProductDetailWrapper)).call.apply(_ref, [this].concat(args))), _this), _this.store = (0, _store.createGlobalStore)(_this.props.data), _this.canUseDOM = typeof window !== 'undefined' && window.document && window.document.createElement, _this.namespace = "cartProductsReducer", _temp), _possibleConstructorReturn(_this, _ret);
       }
 
       _createClass(ProductDetailWrapper, [{
             key: 'render',
             value: function render() {
+                  if (this.canUseDOM) {
+                        this.namespace = this.props.namespace;
+                  }
                   return _react2.default.createElement(
                         _reactRedux.Provider,
                         { store: this.store },
-                        _react2.default.createElement(_CartProduct2.default, { namespace: this.props.data.namespace })
+                        _react2.default.createElement(_CartProduct2.default, { namespace: this.namespace })
                   );
             }
       }]);
@@ -13412,7 +13417,7 @@ if (canUseDOM) {
 
   cartProductCombinedReducer = (0, _redux.combineReducers)(reducerObj);
 } else {
-  cartProductCombinedReducer = (0, _redux.combineReducers)({ cartProductsReducer: cartProductsReducer(cartProductsReducer) });
+  cartProductCombinedReducer = (0, _redux.combineReducers)({ cartProductsReducer: cartProductsReducer("cartProductsReducer") });
 }
 
 exports.default = cartProductCombinedReducer;

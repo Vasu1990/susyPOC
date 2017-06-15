@@ -75,18 +75,27 @@ class CartProduct extends Component {
     }
 }
 
+
+    var canUseDOM = typeof window !== 'undefined' && window.document && window.document.createElement;
+    var namespace;
 const mapStateToProps = (state , ownProps) => {
+    if(canUseDOM) {
+        namespace = ownProps.namespace
+    }else {
+         namespace = "cartProductsReducer"   
+    }
     console.log(state , "product detail state");
         return {
-        productDetail: state.cartProductCombinedReducer[ownProps.namespace].cartProduct,
-        labels: state.cartProductCombinedReducer[ownProps.namespace].labels
+        productDetail: state.cartProductCombinedReducer[namespace].cartProduct,
+        labels: state.cartProductCombinedReducer[namespace].labels
     };
 };
 
 
 const mapDispatchToProps = (dispatch, ownProps) => {
+    
     return {
-        fetchProduct: () => dispatch(getNextProduct(ownProps.namespace))
+        fetchProduct: () => dispatch(getNextProduct(namespace))
     }
 }
 
