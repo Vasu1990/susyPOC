@@ -33,12 +33,12 @@ if(canUseDOM()) {
 
 }
 
- else {
-			ReactDOM.render(
-				<serverComponents.ProductDetail data={window.app} namespace = "cartProductsReducer1"/>,
-			document.getElementById("cartProductsReducer1")); 
+//  else {
+// 			ReactDOM.render(
+// 				<serverComponents.ProductDetail data={window.app} namespace = "cartProductsReducer1"/>,
+// 			document.getElementById("cartProductsReducer1")); 
 		
-			ReactDOM.render(
-				<serverComponents.ProductDetail data={window.app1} namespace = "cartProductsReducer2"/>,
-			document.getElementById("cartProductsReducer2")); 
-}
+// 			ReactDOM.render(
+// 				<serverComponents.ProductDetail data={window.app1} namespace = "cartProductsReducer2"/>,
+// 			document.getElementById("cartProductsReducer2")); 
+// }

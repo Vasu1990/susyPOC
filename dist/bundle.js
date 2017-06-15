@@ -12331,11 +12331,17 @@ if ((0, _Utility.canUseDOM)()) {
 			_reactDom2.default.render(_react2.default.createElement(serverComponents.DumbComponent, { name: window.staticComps.dumbComponent[_reducerKey].componentData.name }), document.getElementById(_reducerKey));
 		}
 	}
-} else {
-	_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, { data: window.app, namespace: 'cartProductsReducer1' }), document.getElementById("cartProductsReducer1"));
-
-	_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, { data: window.app1, namespace: 'cartProductsReducer2' }), document.getElementById("cartProductsReducer2"));
 }
+
+//  else {
+// 			ReactDOM.render(
+// 				<serverComponents.ProductDetail data={window.app} namespace = "cartProductsReducer1"/>,
+// 			document.getElementById("cartProductsReducer1")); 
+
+// 			ReactDOM.render(
+// 				<serverComponents.ProductDetail data={window.app1} namespace = "cartProductsReducer2"/>,
+// 			document.getElementById("cartProductsReducer2")); 
+// }
 
 /***/ }),
 /* 115 */
