@@ -27,20 +27,5 @@ const cartProductsReducer  = (namespace = "cartProductsReducer") =>(cartProductD
    }
 }
 
-
-
-var cartProductCombinedReducer;
-if(canUseDOM()) {
-  var reducerObj = {};
-    for(var reducerKey in window.app.cartProductCombinedReducer) {
-        reducerObj[reducerKey] = cartProductsReducer(reducerKey);
-    }
-    console.log(reducerObj ,"reducer obj");
-
-   cartProductCombinedReducer = combineReducers(reducerObj);
-}else {
-  cartProductCombinedReducer = combineReducers({cartProductsReducer : cartProductsReducer()});
-}
-
-export default cartProductCombinedReducer;
+export default cartProductsReducer;
 
