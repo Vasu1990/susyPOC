@@ -14,8 +14,11 @@ if(canUseDOM) {
 
 	if(mappedData.cartProductCombinedReducer) {
 	  for(let reducerKey in window.app.cartProductCombinedReducer) {
+		  	var componentData = {
+					namespace : reducerKey
+			}
 			ReactDOM.render(
-				<serverComponents.ProductDetail namespace={reducerKey}/>,
+				<serverComponents.ProductDetail data={componentData}/>,
 			document.getElementById(reducerKey)); 
 		}
 	}
@@ -34,9 +37,11 @@ if(canUseDOM) {
 
 } else {
 
-
+			var componentData = {
+					namespace : "cartProductsReducer"
+			}
 			ReactDOM.render(
-				<serverComponents.ProductDetail namespace={"cartProductsReducer"}/>,
+				<serverComponents.ProductDetail data={componentData }/>,
 			document.getElementById("cartProductsReducer")); 
 		
 	

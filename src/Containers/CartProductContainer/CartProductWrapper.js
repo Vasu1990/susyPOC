@@ -12,7 +12,7 @@ export default class ProductDetailWrapper extends Component {
       render() {
             return (
                <Provider store={this.store}>    
-                    <CartProduct namespace= {this.props.namespace}/>
+                    <CartProduct namespace= {this.props.data.namespace}/>
                 </Provider> 
             )
       }

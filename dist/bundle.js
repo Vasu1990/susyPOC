@@ -12202,7 +12202,10 @@ if (canUseDOM) {
 
 	if (mappedData.cartProductCombinedReducer) {
 		for (var reducerKey in window.app.cartProductCombinedReducer) {
-			_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, { namespace: reducerKey }), document.getElementById(reducerKey));
+			var componentData = {
+				namespace: reducerKey
+			};
+			_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, { data: componentData }), document.getElementById(reducerKey));
 		}
 	}
 
@@ -12216,7 +12219,10 @@ if (canUseDOM) {
 	}
 } else {
 
-	_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, { namespace: "cartProductsReducer" }), document.getElementById("cartProductsReducer"));
+	var componentData = {
+		namespace: "cartProductsReducer"
+	};
+	_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, { data: componentData }), document.getElementById("cartProductsReducer"));
 }
 
 /***/ }),
@@ -13338,7 +13344,7 @@ var ProductDetailWrapper = function (_Component) {
                   return _react2.default.createElement(
                         _reactRedux.Provider,
                         { store: this.store },
-                        _react2.default.createElement(_CartProduct2.default, { namespace: this.props.namespace })
+                        _react2.default.createElement(_CartProduct2.default, { namespace: this.props.data.namespace })
                   );
             }
       }]);
