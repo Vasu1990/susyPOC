@@ -13,14 +13,14 @@ class CartProduct extends Component {
     renderCartRows = (product ,labels) => {
             return (
                 <dt className="cart-product" key={product.productId}>
-                    <img src={product.productImage} alt="product_image"/>
+                    <strong dangerouslySetInnerHTML={{ __html: product.productImage}}></strong>
                     <ul>
                         <li><strong dangerouslySetInnerHTML={{ __html: labels.productId }}></strong>
                              <label dangerouslySetInnerHTML={{ __html: product.productId }}></label>    
                          </li>
                         <li>
                             <strong dangerouslySetInnerHTML={{ __html: labels.productName }}></strong> 
-                            <label dangerouslySetInnerHTML={{ __html: product.productName }}></label>   
+                           <a href={product.link}><label dangerouslySetInnerHTML={{ __html: product.productName }}></label>   </a>
                         </li>
                         <li>
                             <strong dangerouslySetInnerHTML={{ __html: labels.productPrice }}></strong> 
@@ -32,7 +32,8 @@ class CartProduct extends Component {
     };
 
     fetchNextProduct = () => {
-        this.props.dispatch(getNextProduct());
+        this.props.fetchProduct(this.props.namespace);
+        // this.props.dispatch(getNextProduct(this.props.namespace));
     }
 
     showNoProduts = () => {
@@ -74,12 +75,20 @@ class CartProduct extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state , ownProps) => {
     console.log(state , "product detail state");
-    return {
-        productDetail: state.cartProductCombinedReducer.cartProductsReducer.cartProduct,
-        labels: state.cartProductCombinedReducer.cartProductsReducer.labels
+        return {
+        productDetail: state.cartProductCombinedReducer[ownProps.namespace].cartProduct,
+        labels: state.cartProductCombinedReducer[ownProps.namespace].labels
     };
 };
 
-export default connect(mapStateToProps)(CartProduct);
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        fetchProduct: () => dispatch(getNextProduct(ownProps.namespace))
+    }
+}
+
+
+export default connect(mapStateToProps , mapDispatchToProps)(CartProduct);

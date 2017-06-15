@@ -13,9 +13,9 @@ export function getProductPrice(product) {
     }
 }
 
-export function getNextProduct() {
+export function getNextProduct(namespace) {
    return function(dispatch , getState) {
-        let product = getState().cartProductCombinedReducer.cartProductsReducer.cartProduct; 
+        let product = getState().cartProductCombinedReducer[namespace].cartProduct; 
        
         axios.get(window.apiUrl.productDetail + "?id=" + parseInt(product.productId + 1))
         .then(res => {
@@ -23,7 +23,7 @@ export function getNextProduct() {
                  axios.get("../../public/data/product-price.json?id=" + apiProduct.productId)
                 .then(res => {
                             apiProduct.productPrice = res.data.productPrice || 0;
-                        	dispatch({type:LOAD_PRODUCT , payload:apiProduct});
+                        	dispatch({type:`${namespace}${LOAD_PRODUCT}` , payload:apiProduct});
                 })
         })
     }

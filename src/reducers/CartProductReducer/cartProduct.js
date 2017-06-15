@@ -3,7 +3,7 @@ import { LOAD_PRICE , LOAD_PRODUCT} from '../../actions/cartProductActions'
 
 
 
-function cartProductsReducer(cartProductData = {
+const cartProductsReducer  = (namespace) =>(cartProductData = {
                     labels: {
                      productName : "",
                      productPrice: "",
@@ -15,10 +15,10 @@ function cartProductsReducer(cartProductData = {
                       productName : "",
                       productId :  0 ,
                       productPrice :  0
-                    }}, action) {
+                    }}, action) => {
    switch (action.type) {
 
-         case LOAD_PRODUCT:
+         case `${namespace}${LOAD_PRODUCT}`:
             cartProductData.cartProduct = action.payload;
          return {...cartProductData};
 
@@ -26,7 +26,14 @@ function cartProductsReducer(cartProductData = {
       return {...cartProductData};
    }
 }
-const cartProductCombinedReducer = combineReducers({cartProductsReducer});
+
+var reducerObj = {};
+  for(var reducerKey in window.app.cartProductCombinedReducer) {
+      reducerObj[reducerKey] = cartProductsReducer(reducerKey);
+  }
+  console.log(reducerObj ,"reducer obj");
+
+const cartProductCombinedReducer = combineReducers(reducerObj);
 
 export default cartProductCombinedReducer;
 
