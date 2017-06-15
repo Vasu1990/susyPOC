@@ -27,7 +27,7 @@ if(canUseDOM) {
 				console.log(window.staticComps.dumbComponent,  reducerKey);
 			
 			ReactDOM.render(
-				<serverComponents.DumbComponent name={window.staticComps.dumbComponent[reducerKey].name}/>,
+				<serverComponents.DumbComponent name={window.staticComps.dumbComponent[reducerKey].componentData.name}/>,
 			document.getElementById(reducerKey)); 
 		}
 	}

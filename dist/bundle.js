@@ -12211,7 +12211,7 @@ if (canUseDOM) {
 		for (var _reducerKey in window.staticComps.dumbComponent) {
 			console.log(window.staticComps.dumbComponent, _reducerKey);
 
-			_reactDom2.default.render(_react2.default.createElement(serverComponents.DumbComponent, { name: window.staticComps.dumbComponent[_reducerKey].name }), document.getElementById(_reducerKey));
+			_reactDom2.default.render(_react2.default.createElement(serverComponents.DumbComponent, { name: window.staticComps.dumbComponent[_reducerKey].componentData.name }), document.getElementById(_reducerKey));
 		}
 	}
 }
@@ -13130,7 +13130,7 @@ var CartProduct = function (_Component) {
                         _react2.default.createElement('strong', { dangerouslySetInnerHTML: { __html: labels.productName } }),
                         _react2.default.createElement(
                             'a',
-                            { href: product.link },
+                            { href: product.productLink },
                             _react2.default.createElement('label', { dangerouslySetInnerHTML: { __html: product.productName } }),
                             '   '
                         )

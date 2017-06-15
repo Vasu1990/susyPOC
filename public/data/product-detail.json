@@ -4,6 +4,7 @@
 				"productImage" : "<img src='https://codropspz-tympanus.netdna-ssl.com/codrops/wp-content/uploads/2010/05/splash.jpg' alt='product_image'/>",
 				"productName" : "Product Name 2",
 				"productId" :  2 ,
-				"productPrice":  0
+				"productPrice":  0 ,
+				"productLink" : "gmail.com"
 			}
 }
