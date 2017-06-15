@@ -12214,6 +12214,9 @@ if (canUseDOM) {
 			_reactDom2.default.render(_react2.default.createElement(serverComponents.DumbComponent, { name: window.staticComps.dumbComponent[_reducerKey].componentData.name }), document.getElementById(_reducerKey));
 		}
 	}
+} else {
+
+	_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, { namespace: "cartProductsReducer" }), document.getElementById("cartProductsReducer"));
 }
 
 /***/ }),
@@ -13391,13 +13394,20 @@ var cartProductsReducer = function cartProductsReducer(namespace) {
   };
 };
 
-var reducerObj = {};
-for (var reducerKey in window.app.cartProductCombinedReducer) {
-  reducerObj[reducerKey] = cartProductsReducer(reducerKey);
-}
-console.log(reducerObj, "reducer obj");
+var canUseDOM = typeof window !== 'undefined' && window.document && window.document.createElement;
 
-var cartProductCombinedReducer = (0, _redux.combineReducers)(reducerObj);
+var cartProductCombinedReducer;
+if (canUseDOM) {
+  var reducerObj = {};
+  for (var reducerKey in window.app.cartProductCombinedReducer) {
+    reducerObj[reducerKey] = cartProductsReducer(reducerKey);
+  }
+  console.log(reducerObj, "reducer obj");
+
+  cartProductCombinedReducer = (0, _redux.combineReducers)(reducerObj);
+} else {
+  cartProductCombinedReducer = (0, _redux.combineReducers)({ cartProductsReducer: cartProductsReducer(cartProductsReducer) });
+}
 
 exports.default = cartProductCombinedReducer;
 

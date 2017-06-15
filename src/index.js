@@ -30,6 +30,14 @@ if(canUseDOM) {
 				<serverComponents.DumbComponent name={window.staticComps.dumbComponent[reducerKey].componentData.name}/>,
 			document.getElementById(reducerKey)); 
 		}
-	}
+	}	
 
+} else {
+
+
+			ReactDOM.render(
+				<serverComponents.ProductDetail namespace={"cartProductsReducer"}/>,
+			document.getElementById("cartProductsReducer")); 
+		
+	
 }

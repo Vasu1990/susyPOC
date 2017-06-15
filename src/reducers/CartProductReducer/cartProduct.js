@@ -27,13 +27,21 @@ const cartProductsReducer  = (namespace) =>(cartProductData = {
    }
 }
 
-var reducerObj = {};
-  for(var reducerKey in window.app.cartProductCombinedReducer) {
-      reducerObj[reducerKey] = cartProductsReducer(reducerKey);
-  }
-  console.log(reducerObj ,"reducer obj");
 
-const cartProductCombinedReducer = combineReducers(reducerObj);
+var canUseDOM = typeof window !== 'undefined' && window.document && window.document.createElement;
+
+var cartProductCombinedReducer;
+if(canUseDOM) {
+  var reducerObj = {};
+    for(var reducerKey in window.app.cartProductCombinedReducer) {
+        reducerObj[reducerKey] = cartProductsReducer(reducerKey);
+    }
+    console.log(reducerObj ,"reducer obj");
+
+   cartProductCombinedReducer = combineReducers(reducerObj);
+}else {
+  cartProductCombinedReducer = combineReducers({cartProductsReducer : cartProductsReducer(cartProductsReducer)});
+}
 
 export default cartProductCombinedReducer;
 
