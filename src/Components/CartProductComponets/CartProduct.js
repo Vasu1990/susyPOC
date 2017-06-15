@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getProductPrice ,getNextProduct } from '../../actions/cartProductActions';
 
-
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import {createGlobalStore} from '../../store/store';
@@ -76,18 +75,11 @@ class CartProduct extends Component {
 }
 
 
-    var canUseDOM = typeof window !== 'undefined' && window.document && window.document.createElement;
-    var namespace;
 const mapStateToProps = (state , ownProps) => {
-    if(canUseDOM) {
-        namespace = ownProps.namespace
-    }else {
-         namespace = "cartProductsReducer"   
-    }
-    console.log(state , "product detail state");
+    console.log(ownProps , "product detail ownProps");
         return {
-        productDetail: state.cartProductCombinedReducer[namespace].cartProduct,
-        labels: state.cartProductCombinedReducer[namespace].labels
+        productDetail: state.cartProductCombinedReducer[ownProps.namespace].cartProduct,
+        labels: state.cartProductCombinedReducer[ownProps.namespace].labels
     };
 };
 
@@ -95,7 +87,7 @@ const mapStateToProps = (state , ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     
     return {
-        fetchProduct: () => dispatch(getNextProduct(namespace))
+        fetchProduct: () => dispatch(getNextProduct(ownProps.namespace))
     }
 }
 

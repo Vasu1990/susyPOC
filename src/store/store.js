@@ -1,14 +1,13 @@
 import combinedReducers  from '../reducers/ContainerReducer/main';
 import { createStore , applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
+import {canUseDOM} from '../Utility';
 
-
-var canUseDOM = typeof window !== 'undefined' && window.document && window.document.createElement;
 
 
 export function createGlobalStore(data = {}) {
   let store ;
-  if(canUseDOM) {
+  if(canUseDOM()) {
    //   for client
         if(window.store) {
               store = window.store;

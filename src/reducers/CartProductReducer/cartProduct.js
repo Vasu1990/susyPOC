@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
 import { LOAD_PRICE , LOAD_PRODUCT} from '../../actions/cartProductActions'
+import {canUseDOM} from '../../Utility';
 
 
-
-const cartProductsReducer  = (namespace) =>(cartProductData = {
+const cartProductsReducer  = (namespace = "cartProductsReducer") =>(cartProductData = {
                     labels: {
                      productName : "",
                      productPrice: "",
@@ -28,10 +28,9 @@ const cartProductsReducer  = (namespace) =>(cartProductData = {
 }
 
 
-var canUseDOM = typeof window !== 'undefined' && window.document && window.document.createElement;
 
 var cartProductCombinedReducer;
-if(canUseDOM) {
+if(canUseDOM()) {
   var reducerObj = {};
     for(var reducerKey in window.app.cartProductCombinedReducer) {
         reducerObj[reducerKey] = cartProductsReducer(reducerKey);
@@ -40,7 +39,7 @@ if(canUseDOM) {
 
    cartProductCombinedReducer = combineReducers(reducerObj);
 }else {
-  cartProductCombinedReducer = combineReducers({cartProductsReducer : cartProductsReducer("cartProductsReducer")});
+  cartProductCombinedReducer = combineReducers({cartProductsReducer : cartProductsReducer()});
 }
 
 export default cartProductCombinedReducer;

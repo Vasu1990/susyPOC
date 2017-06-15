@@ -2,19 +2,17 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import  ReactDOMServer from 'react-dom/server';
+import {canUseDOM} from './Utility';
 
 require("expose-loader?serverComponents!./Components");
 
-var canUseDOM = typeof window !== 'undefined' && window.document && window.document.createElement;
 
-
-if(canUseDOM) {
+if(canUseDOM()) {
 
 	let mappedData = {...window.app};
 
 	if(mappedData.cartProductCombinedReducer) {
 	  for(let reducerKey in window.app.cartProductCombinedReducer) {
-		 
 			ReactDOM.render(
 				<serverComponents.ProductDetail namespace={reducerKey}/>,
 			document.getElementById(reducerKey)); 
@@ -33,10 +31,14 @@ if(canUseDOM) {
 		}
 	}	
 
-} else {
-			ReactDOM.render(
-				<serverComponents.ProductDetail data={window.app}/>,
-			document.getElementById("cartProductsReducer")); 
-		
-	
 }
+
+//  else {
+// 			ReactDOM.render(
+// 				<serverComponents.ProductDetail data={window.app} namespace = "cartProductsReducer"/>,
+// 			document.getElementById("cartProductsReducer")); 
+		
+// 			ReactDOM.render(
+// 				<serverComponents.ProductDetail data={window.app1} namespace = "cartProductsReducer1"/>,
+// 			document.getElementById("cartProductsReducer1")); 
+// }
