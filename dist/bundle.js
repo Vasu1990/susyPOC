@@ -1,4 +1,4 @@
-/******/ (function(modules) { // webpackBootstrap version7
+/******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -13972,10 +13972,8 @@ var CarouselProductWrapper = function (_Component) {
             if ((0, _Utility.canUseDOM)()) {
                 _this.reducerNamespace = _this.props.reducerNamespace;
             } else {
-                for (var guids in _this.props.data) {
-                    for (var guid in _this.props.data[guids]) {
-                        _this.namespace = guid;
-                    }
+                for (var guid in _this.props.data.carouselProductCombinedReducer) {
+                    _this.reducerNamespace = guid;
                 }
             }
             return _this.reducerNamespace;
