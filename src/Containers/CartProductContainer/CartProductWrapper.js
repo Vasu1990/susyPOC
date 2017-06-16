@@ -9,17 +9,17 @@ import {canUseDOM} from '../../Utility';
 
 export default class ProductDetailWrapper extends Component {
             store = createGlobalStore(this.props.data);
-            reducerNamespace;
+            namespace;
            
             getReducerNamespace = () => {
-                   if(canUseDOM()) {
-                        this.reducerNamespace = this.props.reducerNamespace
+                   if(canUseDOM) {
+                        this.namespace = this.props.reducerNamespace
                     } else {
-                          for(var key in this.props.data.cartProductCombinedReducer) {
-                                    this.reducerNamespace = key;
+                          for(var key in this.props.data) {
+                                    namespace = key;
                           }
                     }
-                return this.reducerNamespace;
+                return this.namespace;
             }
 
 

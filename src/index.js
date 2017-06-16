@@ -18,15 +18,23 @@ if(canUseDOM()) {
 			document.getElementById(reducerKey)); 
 		}
 	}
+
+	if(mappedData.carouselProductCombinedReducer) {
+	  for(let reducerKey in window.app.carouselProductCombinedReducer) {
+			ReactDOM.render(
+				<serverComponents.CarouselProduct reducerNamespace={reducerKey}/>,
+			document.getElementById(reducerKey)); 
+		}
+	}
 	
 	
 	if(window.staticComps.dumbComponent) {
-
-		for(let reducerKey in window.staticComps.dumbComponent) {
-				console.log(window.staticComps.dumbComponent,  reducerKey);
+		var staticCompData = window.staticComps.dumbComponent;
+		for(let reducerKey in staticCompData) {
+				console.log(staticCompData,  reducerKey);
 			
 			ReactDOM.render(
-				<serverComponents.DumbComponent name={window.staticComps.dumbComponent[reducerKey].componentData.name}/>,
+				<serverComponents.DumbComponent name={staticCompData[reducerKey].componentData.name}/>,
 			document.getElementById(reducerKey)); 
 		}
 	}	
@@ -41,4 +49,8 @@ if(canUseDOM()) {
 // 			ReactDOM.render(
 // 				<serverComponents.ProductDetail data={window.app1} reducerNamespace = "cartProductsReducer2"/>,
 // 			document.getElementById("cartProductsReducer2")); 
+
+// 			ReactDOM.render(
+// 				<serverComponents.CarouselProduct data={window.app3} reducerNamespace = "cartProductsReducer1"/>,
+// 			document.getElementById("cartProductsReducer1")); 
 // }

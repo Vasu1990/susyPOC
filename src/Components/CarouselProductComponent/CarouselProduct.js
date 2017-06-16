@@ -1,26 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getProductPrice ,getNextProduct } from '../../actions/cartProductActions';
-
-import {Provider} from 'react-redux';
-import {createStore} from 'redux';
-import {createGlobalStore} from '../../store/store';
+import { getProductPrice ,getNextProduct } from '../../actions/carouselProductActions';
 
 
-
-class CartProduct extends Component {
+class CarouselProduct extends Component {
     renderCartRows = (product ,labels) => {
             return (
-                <dt className="cart-product" key={product.productId}>
-                    <strong dangerouslySetInnerHTML={{ __html: product.productImage}}></strong>
+                <dt className="carousel-product" key={product.productId}>
                     <ul>
                         <li><strong dangerouslySetInnerHTML={{ __html: labels.productId }}></strong>
                              <label dangerouslySetInnerHTML={{ __html: product.productId }}></label>    
                          </li>
-                        <li>
-                            <strong dangerouslySetInnerHTML={{ __html: labels.productName }}></strong> 
-                           <a href={product.productLink}><label dangerouslySetInnerHTML={{ __html: product.productName }}></label>   </a>
-                        </li>
                         <li>
                             <strong dangerouslySetInnerHTML={{ __html: labels.productPrice }}></strong> 
                             <label dangerouslySetInnerHTML={{ __html: product.productPrice }}></label>      
@@ -76,20 +66,19 @@ class CartProduct extends Component {
 
 
 const mapStateToProps = (state , ownProps) => {
-    console.log(state , "product detail ownProps");
+    console.log(state , "carousel product detail ownProps");
         return {
-        productDetail: state.cartProductCombinedReducer[ownProps.reducerNamespace].cartProduct,
-        labels: state.cartProductCombinedReducer[ownProps.reducerNamespace].labels
+        productDetail: state.carouselProductCombinedReducer[ownProps.reducerNamespace].carouselProduct,
+        labels: state.carouselProductCombinedReducer[ownProps.reducerNamespace].labels
     };
 };
 
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    
     return {
         fetchProduct: () => dispatch(getNextProduct(ownProps.reducerNamespace))
     }
 }
 
 
-export default connect(mapStateToProps , mapDispatchToProps)(CartProduct);
+export default connect(mapStateToProps , mapDispatchToProps)(CarouselProduct);

@@ -1,16 +1,17 @@
 import {canUseDOM} from '../../Utility';
 import { combineReducers } from 'redux';
 import cartProductReducer from '../CartProductReducer/cartProduct';
-
+import carouselProductReducer from '../CarouselProductReducer/carouselProduct';
 
 
 export const creteMainReducer = (storeData) => {
 
     // 1st loop to find parent reducer
+    var combinedReducerObject = {};
+    
     for(var parentReducer in storeData) {
       let reducerObj = {};
       let reducerFunction;
-      var combinedReducerObject = {};
 
     // 2nd loop to get rach GUID of a reducer to make multiple instances
           for(var reducerGUID in storeData[parentReducer]) {
@@ -19,6 +20,9 @@ export const creteMainReducer = (storeData) => {
                     //find matching reducer to select the reducer function
                     case "cartProductReducer" :
                         reducerFunction = cartProductReducer;
+                    break;
+                    case "carouselProductReducer" :
+                        reducerFunction = carouselProductReducer;
                     break;
 
                         default : 

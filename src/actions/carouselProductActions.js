@@ -15,7 +15,7 @@ export function getProductPrice(product) {
 
 export function getNextProduct(namespace) {
    return function(dispatch , getState) {
-        let product = getState().cartProductCombinedReducer[namespace].cartProduct; 
+        let product = getState().carouselProductCombinedReducer[namespace].carouselProduct; 
        
         axios.get(window.apiUrl.productDetail + "?id=" + parseInt(product.productId + 1))
         .then(res => {
