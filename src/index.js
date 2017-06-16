@@ -11,7 +11,7 @@ if(canUseDOM()) {
 
 	let mappedData = {...window.app};
 
-	if(mappedData.cartProductCombinedReducer) {
+	if(mappedData && mappedData.cartProductCombinedReducer) {
 	  for(let reducerKey in window.app.cartProductCombinedReducer) {
 			ReactDOM.render(
 				<serverComponents.ProductDetail reducerNamespace={reducerKey}/>,
@@ -19,7 +19,7 @@ if(canUseDOM()) {
 		}
 	}
 
-	if(mappedData.carouselProductCombinedReducer) {
+	if(mappedData && mappedData.carouselProductCombinedReducer) {
 	  for(let reducerKey in window.app.carouselProductCombinedReducer) {
 			ReactDOM.render(
 				<serverComponents.CarouselProduct reducerNamespace={reducerKey}/>,
@@ -28,7 +28,7 @@ if(canUseDOM()) {
 	}
 	
 	
-	if(window.staticComps.dumbComponent) {
+	if(window.staticComps  && window.staticComps.dumbComponent) {
 		var staticCompData = window.staticComps.dumbComponent;
 		for(let reducerKey in staticCompData) {
 				console.log(staticCompData,  reducerKey);
@@ -43,14 +43,14 @@ if(canUseDOM()) {
 
 //  else {
 // 			ReactDOM.render(
-// 				<serverComponents.ProductDetail data={window.app} reducerNamespace = "cartProductsReducer1"/>,
+// 				<serverComponents.ProductDetail data={window.app} />,
 // 			document.getElementById("cartProductsReducer1")); 
 		
 // 			ReactDOM.render(
-// 				<serverComponents.ProductDetail data={window.app1} reducerNamespace = "cartProductsReducer2"/>,
+// 				<serverComponents.ProductDetail data={window.app1} />,
 // 			document.getElementById("cartProductsReducer2")); 
 
 // 			ReactDOM.render(
-// 				<serverComponents.CarouselProduct data={window.app3} reducerNamespace = "cartProductsReducer1"/>,
-// 			document.getElementById("cartProductsReducer1")); 
+// 				<serverComponents.CarouselProduct data={window.app3} />,
+// 			document.getElementById("carouselProductsReducer1")); 
 // }

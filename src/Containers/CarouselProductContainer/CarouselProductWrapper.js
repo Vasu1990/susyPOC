@@ -14,8 +14,10 @@ export default class CarouselProductWrapper extends Component {
                    if(canUseDOM()) {
                         this.reducerNamespace = this.props.reducerNamespace
                     } else {
-                          for(var key in this.props.data.carouselProductCombinedReducer) {
-                                    this.reducerNamespace = key;
+                            for(var guids in this.props.data) {
+                                for(var guid in this.props.data[guids]) {
+                                    this.namespace = guid;
+                                }
                           }
                     }
                 return this.reducerNamespace;

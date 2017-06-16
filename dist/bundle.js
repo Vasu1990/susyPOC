@@ -1,4 +1,4 @@
-/******/ (function(modules) { // webpackBootstrap version:4
+/******/ (function(modules) { // webpackBootstrap version:5
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -2345,7 +2345,7 @@ var canUseDOM = exports.canUseDOM = function canUseDOM() {
 
 var simulateServer = exports.simulateServer = function simulateServer() {
     var isClitent = typeof window !== 'undefined' && window.document && window.document.createElement;
-    return isClitent;
+    return !isClitent;
 };
 
 /***/ }),
@@ -12382,19 +12382,19 @@ if ((0, _Utility.canUseDOM)()) {
 
 	var mappedData = _extends({}, window.app);
 
-	if (mappedData.cartProductCombinedReducer) {
+	if (mappedData && mappedData.cartProductCombinedReducer) {
 		for (var reducerKey in window.app.cartProductCombinedReducer) {
 			_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, { reducerNamespace: reducerKey }), document.getElementById(reducerKey));
 		}
 	}
 
-	if (mappedData.carouselProductCombinedReducer) {
+	if (mappedData && mappedData.carouselProductCombinedReducer) {
 		for (var _reducerKey in window.app.carouselProductCombinedReducer) {
 			_reactDom2.default.render(_react2.default.createElement(serverComponents.CarouselProduct, { reducerNamespace: _reducerKey }), document.getElementById(_reducerKey));
 		}
 	}
 
-	if (window.staticComps.dumbComponent) {
+	if (window.staticComps && window.staticComps.dumbComponent) {
 		var staticCompData = window.staticComps.dumbComponent;
 		for (var _reducerKey2 in staticCompData) {
 			console.log(staticCompData, _reducerKey2);
@@ -12406,16 +12406,16 @@ if ((0, _Utility.canUseDOM)()) {
 
 //  else {
 // 			ReactDOM.render(
-// 				<serverComponents.ProductDetail data={window.app} reducerNamespace = "cartProductsReducer1"/>,
+// 				<serverComponents.ProductDetail data={window.app} />,
 // 			document.getElementById("cartProductsReducer1")); 
 
 // 			ReactDOM.render(
-// 				<serverComponents.ProductDetail data={window.app1} reducerNamespace = "cartProductsReducer2"/>,
+// 				<serverComponents.ProductDetail data={window.app1} />,
 // 			document.getElementById("cartProductsReducer2")); 
 
 // 			ReactDOM.render(
-// 				<serverComponents.CarouselProduct data={window.app3} reducerNamespace = "cartProductsReducer1"/>,
-// 			document.getElementById("cartProductsReducer1")); 
+// 				<serverComponents.CarouselProduct data={window.app3} />,
+// 			document.getElementById("carouselProductsReducer1")); 
 // }
 
 /***/ }),
@@ -13661,7 +13661,7 @@ var SimpleComponent2 = exports.SimpleComponent2 = function SimpleComponent2(_ref
 
 
 Object.defineProperty(exports, "__esModule", {
-      value: true
+    value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -13691,43 +13691,45 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var CarouselProductWrapper = function (_Component) {
-      _inherits(CarouselProductWrapper, _Component);
+    _inherits(CarouselProductWrapper, _Component);
 
-      function CarouselProductWrapper() {
-            var _ref;
+    function CarouselProductWrapper() {
+        var _ref;
 
-            var _temp, _this, _ret;
+        var _temp, _this, _ret;
 
-            _classCallCheck(this, CarouselProductWrapper);
+        _classCallCheck(this, CarouselProductWrapper);
 
-            for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-                  args[_key] = arguments[_key];
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = CarouselProductWrapper.__proto__ || Object.getPrototypeOf(CarouselProductWrapper)).call.apply(_ref, [this].concat(args))), _this), _this.store = (0, _store.createGlobalStore)(_this.props.data), _this.getReducerNamespace = function () {
+            if ((0, _Utility.canUseDOM)()) {
+                _this.reducerNamespace = _this.props.reducerNamespace;
+            } else {
+                for (var guids in _this.props.data) {
+                    for (var guid in _this.props.data[guids]) {
+                        _this.namespace = guid;
+                    }
+                }
             }
+            return _this.reducerNamespace;
+        }, _temp), _possibleConstructorReturn(_this, _ret);
+    }
 
-            return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = CarouselProductWrapper.__proto__ || Object.getPrototypeOf(CarouselProductWrapper)).call.apply(_ref, [this].concat(args))), _this), _this.store = (0, _store.createGlobalStore)(_this.props.data), _this.getReducerNamespace = function () {
-                  if ((0, _Utility.canUseDOM)()) {
-                        _this.reducerNamespace = _this.props.reducerNamespace;
-                  } else {
-                        for (var key in _this.props.data.carouselProductCombinedReducer) {
-                              _this.reducerNamespace = key;
-                        }
-                  }
-                  return _this.reducerNamespace;
-            }, _temp), _possibleConstructorReturn(_this, _ret);
-      }
+    _createClass(CarouselProductWrapper, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                _reactRedux.Provider,
+                { store: this.store },
+                _react2.default.createElement(_CarouselProduct2.default, { reducerNamespace: this.getReducerNamespace() })
+            );
+        }
+    }]);
 
-      _createClass(CarouselProductWrapper, [{
-            key: 'render',
-            value: function render() {
-                  return _react2.default.createElement(
-                        _reactRedux.Provider,
-                        { store: this.store },
-                        _react2.default.createElement(_CarouselProduct2.default, { reducerNamespace: this.getReducerNamespace() })
-                  );
-            }
-      }]);
-
-      return CarouselProductWrapper;
+    return CarouselProductWrapper;
 }(_react.Component);
 
 exports.default = CarouselProductWrapper;
@@ -13788,11 +13790,13 @@ var ProductDetailWrapper = function (_Component) {
             }
 
             return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ProductDetailWrapper.__proto__ || Object.getPrototypeOf(ProductDetailWrapper)).call.apply(_ref, [this].concat(args))), _this), _this.store = (0, _store.createGlobalStore)(_this.props.data), _this.getReducerNamespace = function () {
-                  if (_Utility.canUseDOM) {
+                  if ((0, _Utility.canUseDOM)()) {
                         _this.namespace = _this.props.reducerNamespace;
                   } else {
-                        for (var key in _this.props.data) {
-                              namespace = key;
+                        for (var guids in _this.props.data) {
+                              for (var guid in _this.props.data[guids]) {
+                                    _this.namespace = guid;
+                              }
                         }
                   }
                   return _this.namespace;

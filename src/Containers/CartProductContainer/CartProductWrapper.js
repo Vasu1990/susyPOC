@@ -12,11 +12,13 @@ export default class ProductDetailWrapper extends Component {
             namespace;
            
             getReducerNamespace = () => {
-                   if(canUseDOM) {
+                   if(canUseDOM()) {
                         this.namespace = this.props.reducerNamespace
                     } else {
-                          for(var key in this.props.data) {
-                                    namespace = key;
+                          for(var guids in this.props.data) {
+                                for(var guid in this.props.data[guids]) {
+                                    this.namespace = guid;
+                                }
                           }
                     }
                 return this.namespace;
