@@ -78,8 +78,8 @@ class CartProduct extends Component {
 const mapStateToProps = (state , ownProps) => {
     console.log(ownProps , "product detail ownProps");
         return {
-        productDetail: state.cartProductCombinedReducer[ownProps.namespace].cartProduct,
-        labels: state.cartProductCombinedReducer[ownProps.namespace].labels
+        productDetail: state.cartProductCombinedReducer[ownProps.reducerNamespace].cartProduct,
+        labels: state.cartProductCombinedReducer[ownProps.reducerNamespace].labels
     };
 };
 
@@ -87,7 +87,7 @@ const mapStateToProps = (state , ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     
     return {
-        fetchProduct: () => dispatch(getNextProduct(ownProps.namespace))
+        fetchProduct: () => dispatch(getNextProduct(ownProps.reducerNamespace))
     }
 }
 

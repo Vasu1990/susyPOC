@@ -14,7 +14,7 @@ if(canUseDOM()) {
 	if(mappedData.cartProductCombinedReducer) {
 	  for(let reducerKey in window.app.cartProductCombinedReducer) {
 			ReactDOM.render(
-				<serverComponents.ProductDetail namespace={reducerKey}/>,
+				<serverComponents.ProductDetail reducerNamespace={reducerKey}/>,
 			document.getElementById(reducerKey)); 
 		}
 	}
@@ -35,10 +35,10 @@ if(canUseDOM()) {
 
 //  else {
 // 			ReactDOM.render(
-// 				<serverComponents.ProductDetail data={window.app} namespace = "cartProductsReducer1"/>,
+// 				<serverComponents.ProductDetail data={window.app} reducerNamespace = "cartProductsReducer1"/>,
 // 			document.getElementById("cartProductsReducer1")); 
 		
 // 			ReactDOM.render(
-// 				<serverComponents.ProductDetail data={window.app1} namespace = "cartProductsReducer2"/>,
+// 				<serverComponents.ProductDetail data={window.app1} reducerNamespace = "cartProductsReducer2"/>,
 // 			document.getElementById("cartProductsReducer2")); 
 // }

@@ -7880,25 +7880,26 @@ var _cartProduct2 = _interopRequireDefault(_cartProduct);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//set initial data depending on client or server
-var storeData = (0, _Utility.canUseDOM)() ? window.app : data;
-var mainReducer = (0, _main.creteMainReducer)(storeData);
-
 function createGlobalStore() {
   var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   var store = void 0;
+  var storeData = (0, _Utility.canUseDOM)() ? window.app : data;
+  var mainReducer;
 
   if ((0, _Utility.canUseDOM)()) {
     //   for client
     if (window.store) {
       store = window.store;
     } else {
+      //set initial data depending on client or server
+      mainReducer = (0, _main.creteMainReducer)(storeData);
       window.store = (0, _redux.createStore)(mainReducer, window.app, (0, _redux.applyMiddleware)(_reduxThunk2.default));
       store = window.store;
     }
   } else {
-    // for server   
+    // for server  
+    mainReducer = (0, _main.creteMainReducer)(storeData);
     store = (0, _redux.createStore)(mainReducer, data, (0, _redux.applyMiddleware)(_reduxThunk2.default));
   }
 
@@ -12319,7 +12320,7 @@ if ((0, _Utility.canUseDOM)()) {
 
 	if (mappedData.cartProductCombinedReducer) {
 		for (var reducerKey in window.app.cartProductCombinedReducer) {
-			_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, { namespace: reducerKey }), document.getElementById(reducerKey));
+			_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, { reducerNamespace: reducerKey }), document.getElementById(reducerKey));
 		}
 	}
 
@@ -12335,11 +12336,11 @@ if ((0, _Utility.canUseDOM)()) {
 
 //  else {
 // 			ReactDOM.render(
-// 				<serverComponents.ProductDetail data={window.app} namespace = "cartProductsReducer1"/>,
+// 				<serverComponents.ProductDetail data={window.app} reducerNamespace = "cartProductsReducer1"/>,
 // 			document.getElementById("cartProductsReducer1")); 
 
 // 			ReactDOM.render(
-// 				<serverComponents.ProductDetail data={window.app1} namespace = "cartProductsReducer2"/>,
+// 				<serverComponents.ProductDetail data={window.app1} reducerNamespace = "cartProductsReducer2"/>,
 // 			document.getElementById("cartProductsReducer2")); 
 // }
 
@@ -13341,8 +13342,8 @@ var CartProduct = function (_Component) {
 var mapStateToProps = function mapStateToProps(state, ownProps) {
     console.log(ownProps, "product detail ownProps");
     return {
-        productDetail: state.cartProductCombinedReducer[ownProps.namespace].cartProduct,
-        labels: state.cartProductCombinedReducer[ownProps.namespace].labels
+        productDetail: state.cartProductCombinedReducer[ownProps.reducerNamespace].cartProduct,
+        labels: state.cartProductCombinedReducer[ownProps.reducerNamespace].labels
     };
 };
 
@@ -13350,7 +13351,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
 
     return {
         fetchProduct: function fetchProduct() {
-            return dispatch((0, _cartProductActions.getNextProduct)(ownProps.namespace));
+            return dispatch((0, _cartProductActions.getNextProduct)(ownProps.reducerNamespace));
         }
     };
 };
@@ -13465,7 +13466,7 @@ var ProductDetailWrapper = function (_Component) {
                   return _react2.default.createElement(
                         _reactRedux.Provider,
                         { store: this.store },
-                        _react2.default.createElement(_CartProduct2.default, { namespace: this.props.namespace })
+                        _react2.default.createElement(_CartProduct2.default, { reducerNamespace: this.props.reducerNamespace })
                   );
             }
       }]);
