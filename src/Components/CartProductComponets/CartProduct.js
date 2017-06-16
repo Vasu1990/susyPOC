@@ -13,6 +13,9 @@ class CartProduct extends Component {
             return (
                 <dt className="cart-product" key={product.productId}>
                     <strong dangerouslySetInnerHTML={{ __html: product.productImage}}></strong>
+                    Link
+                    <strong dangerouslySetInnerHTML={{ __html: product.productLink}}></strong>
+                
                     <ul>
                         <li><strong dangerouslySetInnerHTML={{ __html: labels.productId }}></strong>
                              <label dangerouslySetInnerHTML={{ __html: product.productId }}></label>    
@@ -20,8 +23,6 @@ class CartProduct extends Component {
                         <li>
                             <strong dangerouslySetInnerHTML={{ __html: labels.productName }}></strong> 
                             <label dangerouslySetInnerHTML={{ __html: product.productName }}></label> 
-
-                            <span dangerouslySetInnerHTML={{ __html: product.productLink}}>  </span>
                         </li>
                         <li>
                             <strong dangerouslySetInnerHTML={{ __html: labels.productPrice }}></strong> 

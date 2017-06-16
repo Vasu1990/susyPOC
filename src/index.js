@@ -26,7 +26,14 @@ if(canUseDOM()) {
 			document.getElementById(reducerKey)); 
 		}
 	}
-	
+
+	if(document.getElementById("google-map") !== null) {
+			ReactDOM.render(
+				<serverComponents.GoogleMapComp /> ,
+			document.getElementById("google-map")); 
+		
+	}
+		
 	
 	if(window.staticComps  && window.staticComps.dumbComponent) {
 		var staticCompData = window.staticComps.dumbComponent;

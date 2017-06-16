@@ -1,0 +1,20 @@
+{
+    "Locations": [
+        {
+                "Name": "Jaipur",
+                "Laltitude": "26.9124",
+                "Longitude": "75.7873",
+                "IsDefault": true
+        },
+        {
+                "Name": "Amritsar",
+                "Laltitude": "31.6340",
+                "Longitude": "74.8723",
+                "IsDefault": false
+        }
+    ],
+    "CenterLatitude": 28.7041,
+    "CenterLongitude": 77.1025,
+    "Radius": 2000,
+    "Zoom": 7
+}
