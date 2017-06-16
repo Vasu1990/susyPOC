@@ -1,4 +1,4 @@
-/******/ (function(modules) { // webpackBootstrap version:5
+/******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -13474,11 +13474,11 @@ var CartProduct = function (_Component) {
                         'li',
                         null,
                         _react2.default.createElement('strong', { dangerouslySetInnerHTML: { __html: labels.productName } }),
+                        _react2.default.createElement('label', { dangerouslySetInnerHTML: { __html: product.productName } }),
                         _react2.default.createElement(
-                            'a',
-                            { href: product.productLink },
-                            _react2.default.createElement('label', { dangerouslySetInnerHTML: { __html: product.productName } }),
-                            '   '
+                            'span',
+                            { dangerouslySetInnerHTML: { __html: product.productLink } },
+                            '  '
                         )
                     ),
                     _react2.default.createElement(
@@ -13893,6 +13893,16 @@ module.exports = {
     DumbComponent: _SimpleComponent.SimpleComponent,
     DumbComponent1: _SimpleComponent2.SimpleComponent2
 };
+
+function sum(a) {
+    return function (b) {
+        return function (c) {
+            return a + b + c;
+        };
+    };
+}
+
+var z = sum(10)(20)(30);
 
 /***/ }),
 /* 142 */
