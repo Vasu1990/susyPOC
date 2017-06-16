@@ -1,4 +1,4 @@
-/******/ (function(modules) { // webpackBootstrap
+/******/ (function(modules) { // webpackBootstrap verson:1
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -13340,7 +13340,7 @@ var CartProduct = function (_Component) {
 }(_react.Component);
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-    console.log(ownProps, "product detail ownProps");
+    console.log(state, "product detail ownProps");
     return {
         productDetail: state.cartProductCombinedReducer[ownProps.reducerNamespace].cartProduct,
         labels: state.cartProductCombinedReducer[ownProps.reducerNamespace].labels
@@ -13457,7 +13457,16 @@ var ProductDetailWrapper = function (_Component) {
                   args[_key] = arguments[_key];
             }
 
-            return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ProductDetailWrapper.__proto__ || Object.getPrototypeOf(ProductDetailWrapper)).call.apply(_ref, [this].concat(args))), _this), _this.store = (0, _store.createGlobalStore)(_this.props.data), _temp), _possibleConstructorReturn(_this, _ret);
+            return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ProductDetailWrapper.__proto__ || Object.getPrototypeOf(ProductDetailWrapper)).call.apply(_ref, [this].concat(args))), _this), _this.store = (0, _store.createGlobalStore)(_this.props.data), _this.getReducerNamespace = function () {
+                  if ((0, _Utility.canUseDOM)()) {
+                        _this.reducerNamespace = _this.props.reducerNamespace;
+                  } else {
+                        for (var key in _this.props.data.cartProductCombinedReducer) {
+                              _this.reducerNamespace = key;
+                        }
+                  }
+                  return _this.reducerNamespace;
+            }, _temp), _possibleConstructorReturn(_this, _ret);
       }
 
       _createClass(ProductDetailWrapper, [{
@@ -13466,7 +13475,7 @@ var ProductDetailWrapper = function (_Component) {
                   return _react2.default.createElement(
                         _reactRedux.Provider,
                         { store: this.store },
-                        _react2.default.createElement(_CartProduct2.default, { reducerNamespace: this.props.reducerNamespace })
+                        _react2.default.createElement(_CartProduct2.default, { reducerNamespace: this.getReducerNamespace() })
                   );
             }
       }]);

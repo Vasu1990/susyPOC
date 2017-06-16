@@ -76,7 +76,7 @@ class CartProduct extends Component {
 
 
 const mapStateToProps = (state , ownProps) => {
-    console.log(ownProps , "product detail ownProps");
+    console.log(state , "product detail ownProps");
         return {
         productDetail: state.cartProductCombinedReducer[ownProps.reducerNamespace].cartProduct,
         labels: state.cartProductCombinedReducer[ownProps.reducerNamespace].labels
