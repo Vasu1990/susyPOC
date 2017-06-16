@@ -5,5 +5,5 @@ export const canUseDOM = () => {
 
 export const simulateServer = () => {
     let isClitent = typeof window !== 'undefined' && window.document && window.document.createElement;
-    return !isClitent;
+    return isClitent;
 }

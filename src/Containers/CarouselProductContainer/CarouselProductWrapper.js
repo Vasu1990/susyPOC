@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import {Provider} from 'react-redux';
-import CarouselProduct from '../../Components/CarouselProductComponent/CarouselProduct';
+import {CarouselProdWrapper} from '../../Components/CarouselProductComponent/wrapper';
 import {createStore} from 'redux';
 import {createGlobalStore} from '../../store/store';
 import {canUseDOM} from '../../Utility';
@@ -26,7 +26,7 @@ export default class CarouselProductWrapper extends Component {
       render() {
             return (
                <Provider store={this.store}>    
-                    <CarouselProduct reducerNamespace = {this.getReducerNamespace()}/>
+                    <CarouselProdWrapper reducerNamespace = {this.getReducerNamespace()}/>
                 </Provider> 
             )
       }

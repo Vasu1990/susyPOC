@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getProductPrice ,getNextProduct } from '../../actions/carouselProductActions';
 
 
-class CarouselProduct extends Component {
+export default class CarouselProduct extends Component {
     renderCartRows = (product ,labels) => {
             return (
                 <dt className="carousel-product" key={product.productId}>
@@ -39,7 +37,7 @@ class CarouselProduct extends Component {
 
 
     render() {
-    console.log("component rendered " , this.props);
+        console.log("component rendered " , this.props);
 
         return (
 
@@ -48,10 +46,10 @@ class CarouselProduct extends Component {
                     <div className="row">
                         <div className="col-sm-12">
                             <h1>This is a smart component fetching new produc through ajax on every click</h1>
-                            <h2 dangerouslySetInnerHTML={{ __html: this.props.labels.title }}></h2>
+                            <h2 dangerouslySetInnerHTML={{ __html: this.props.data.labels.title }}></h2>
                             <dl className="cart-products">
-                                {this.props.productDetail? 
-                                    this.renderCartRows(this.props.productDetail , this.props.labels) : 
+                                {this.props.data? 
+                                    this.renderCartRows(this.props.data.carouselProduct , this.props.data.labels) : 
                                     this.showNoProduts()
                                 }
                             </dl>
@@ -63,22 +61,3 @@ class CarouselProduct extends Component {
         );
     }
 }
-
-
-const mapStateToProps = (state , ownProps) => {
-    console.log(state , "carousel product detail ownProps");
-        return {
-        productDetail: state.carouselProductCombinedReducer[ownProps.reducerNamespace].carouselProduct,
-        labels: state.carouselProductCombinedReducer[ownProps.reducerNamespace].labels
-    };
-};
-
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        fetchProduct: () => dispatch(getNextProduct(ownProps.reducerNamespace))
-    }
-}
-
-
-export default connect(mapStateToProps , mapDispatchToProps)(CarouselProduct);

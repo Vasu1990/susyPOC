@@ -5,7 +5,7 @@ import  ReactDOMServer from 'react-dom/server';
 import {canUseDOM} from './Utility';
 
 require("expose-loader?serverComponents!./Components");
-
+require("expose-loader?serverOnlyComponents!./Containers");
 
 if(canUseDOM()) {
 
@@ -48,16 +48,16 @@ if(canUseDOM()) {
 
 }
 
-//  else {
-// 			ReactDOM.render(
-// 				<serverComponents.ProductDetail data={window.app} />,
-// 			document.getElementById("cartProductsReducer1")); 
+ else {
+			ReactDOM.render(
+				<serverComponents.ProductDetail data={window.app} />,
+			document.getElementById("cartProductsReducer1")); 
 		
-// 			ReactDOM.render(
-// 				<serverComponents.ProductDetail data={window.app1} />,
-// 			document.getElementById("cartProductsReducer2")); 
+			ReactDOM.render(
+				<serverComponents.ProductDetail data={window.app1} />,
+			document.getElementById("cartProductsReducer2")); 
 
-// 			ReactDOM.render(
-// 				<serverComponents.CarouselProduct data={window.app3} />,
-// 			document.getElementById("carouselProductsReducer1")); 
-// }
+			ReactDOM.render(
+				<serverOnlyComponents.CarouselProdWrapper data={window.app3}/>,
+			document.getElementById("carouselProductsReducer3")); 
+}
