@@ -1,4 +1,4 @@
-/******/ (function(modules) { // webpackBootstrap //v1
+/******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -12538,11 +12538,13 @@ if ((0, _Utility.canUseDOM)()) {
 		}
 	}
 } else {
-	_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, { data: window.app }), document.getElementById("cartProductsReducer1"));
+	if ((0, _Utility.simulateServer)()) {
+		_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, { data: window.app }), document.getElementById("cartProductsReducer1"));
 
-	_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, { data: window.app1 }), document.getElementById("cartProductsReducer2"));
+		_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, { data: window.app1 }), document.getElementById("cartProductsReducer2"));
 
-	_reactDom2.default.render(_react2.default.createElement(serverOnlyComponents.CarouselProdWrapper, { data: window.app3 }), document.getElementById("carouselProductsReducer3"));
+		_reactDom2.default.render(_react2.default.createElement(serverOnlyComponents.CarouselProdWrapper, { data: window.app3 }), document.getElementById("carouselProductsReducer3"));
+	}
 }
 
 /***/ }),
