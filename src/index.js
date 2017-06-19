@@ -60,4 +60,4 @@ if(canUseDOM()) {
 			ReactDOM.render(
 				<serverOnlyComponents.CarouselProdWrapper data={window.app3}/>,
 			document.getElementById("carouselProductsReducer3")); 
-}
+}	
