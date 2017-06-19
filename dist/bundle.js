@@ -13496,7 +13496,11 @@ var CartProduct = function (_Component) {
                     _react2.default.createElement(
                         'li',
                         null,
-                        _react2.default.createElement('strong', { dangerouslySetInnerHTML: { __html: labels.productName } }),
+                        _react2.default.createElement(
+                            'strong',
+                            null,
+                            labels.productName
+                        ),
                         _react2.default.createElement('label', { dangerouslySetInnerHTML: { __html: product.productName } })
                     ),
                     _react2.default.createElement(

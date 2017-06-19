@@ -21,7 +21,7 @@ class CartProduct extends Component {
                              <label dangerouslySetInnerHTML={{ __html: product.productId }}></label>    
                          </li>
                         <li>
-                            <strong dangerouslySetInnerHTML={{ __html: labels.productName }}></strong> 
+                            <strong>{labels.productName}</strong> 
                             <label dangerouslySetInnerHTML={{ __html: product.productName }}></label> 
                         </li>
                         <li>
