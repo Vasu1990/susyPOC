@@ -2345,7 +2345,7 @@ var canUseDOM = exports.canUseDOM = function canUseDOM() {
 
 var simulateServer = exports.simulateServer = function simulateServer() {
     var isClitent = typeof window !== 'undefined' && window.document && window.document.createElement;
-    return !isClitent;
+    return isClitent;
 };
 
 /***/ }),
@@ -12406,21 +12406,15 @@ if ((0, _Utility.canUseDOM)()) {
 			_reactDom2.default.render(_react2.default.createElement(serverComponents.DumbComponent, { name: staticCompData[_reducerKey2].componentData.name }), document.getElementById(_reducerKey2));
 		}
 	}
+} else {
+	if ((0, _Utility.simulateServer)()) {
+		_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, { data: window.app }), document.getElementById("cartProductsReducer1"));
+
+		_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, { data: window.app1 }), document.getElementById("cartProductsReducer2"));
+
+		_reactDom2.default.render(_react2.default.createElement(serverComponents.CarouselProduct, { data: window.app3 }), document.getElementById("carouselProductsReducer1"));
+	}
 }
-
-//  else {
-// 			ReactDOM.render(
-// 				<serverComponents.ProductDetail data={window.app} />,
-// 			document.getElementById("cartProductsReducer1")); 
-
-// 			ReactDOM.render(
-// 				<serverComponents.ProductDetail data={window.app1} />,
-// 			document.getElementById("cartProductsReducer2")); 
-
-// 			ReactDOM.render(
-// 				<serverComponents.CarouselProduct data={window.app3} />,
-// 			document.getElementById("carouselProductsReducer1")); 
-// }
 
 /***/ }),
 /* 117 */
