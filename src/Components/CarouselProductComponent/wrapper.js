@@ -6,6 +6,7 @@ import { getProductPrice ,getNextProduct } from '../../actions/carouselProductAc
 export const CarouselProdWrapper = connect(
     //map state to props
     (state , ownProps) => {
+        console.log(state);
             return {
             data: state.carouselProductCombinedReducer[ownProps.reducerNamespace]
         };

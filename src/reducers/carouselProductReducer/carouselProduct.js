@@ -5,12 +5,18 @@ import {canUseDOM} from '../../Utility';
 
 const carouselProductReducer  = (namespace = "carouselProductReducer") =>(carouselProductData = {
                     labels: {
-                     productPrice: "",
-                     productId : "",
+                      productName : "",
+                      productImage : "",
+                      productId :  "" ,
+                      productPrice :  "",
+                      productLink : "" 
                     },
                     carouselProduct:{
-                      productId :  0 ,
-                      productPrice :  0
+                      productName : "",
+                      productImage : "",
+                      productId :  1 ,
+                      productPrice :  0,
+                      productLink : "" 
                     }}, action) => {
    switch (action.type) {
 

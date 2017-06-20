@@ -36,88 +36,15 @@
 
 <div data-component="dumb-component" id="google-map"></div>
 <script>
-  var canUseDOM = typeof window !== 'undefined' && window.document && window.document.createElement;
-  if(canUseDOM){
-        window.app = { 
-              cartProductCombinedReducer: {
-                cartProductsReducer1: {
-                  reducerName : "cartProductReducer",
-                  labels : {
-                     productName : "Product Name",
-                     productPrice: "Product Price",
-                     productId : "Id",
-                     title : "This is  product detail"
-                  },
-                  cartProduct : {
-                      productName : "Hero Cycles",
-                      productImage : "<img src='https://images.apple.com/uk/pr/products/images/iPhone6_34FR_SpGry_iPhone6plus_34FL_SpGry_Homescreen_HERO.jpg' alt='product_image'/>",
-                      productId :  1 ,
-                      productPrice :  0,
-                      productLink : "<a href='google.com' />"                      
-                    }
-
-                } ,
-                cartProductsReducer2: {
-                  reducerName : "cartProductReducer",
-                  labels : {
-                     productName : "Product Name2",
-                     productPrice: "Product Price2",
-                     productId : "Id2",
-                     title : "This is  product detail2"
-                  },
-                  cartProduct : {
-                      productName : "Hero Cycles2",
-                      productImage : "<img src='https://images.apple.com/uk/pr/products/images/iPhone6_34FR_SpGry_iPhone6plus_34FL_SpGry_Homescreen_HERO.jpg' alt='product_image'/>",
-                      productId :  2,
-                      productPrice :  0,
-                      productLink : "<a href='google.com'/>"
-                      
-                    }
-                }
-                
-              }, 
-            carouselProductCombinedReducer: {
-              carouselProductsReducer1: {
-                        reducerName : "carouselProductReducer",
-                          labels : {
-                            productName : "Product Name",
-                            productPrice: "Product Price",
-                            productId : "Id",
-                            title : "This is  product detail"
-                          },
-                          carouselProduct : {
-                            productName : "Hero Cycles",
-                            productImage : "<img src='https://images.apple.com/uk/pr/products/images/iPhone6_34FR_SpGry_iPhone6plus_34FL_SpGry_Homescreen_HERO.jpg' alt='product_image'/>",
-                            productId :  1 ,
-                            productPrice :  0,
-                            productLink : "<a href='google.com' />"    
-                            }
-
-                        } ,
-                        carouselProductsReducer3: {
-                        reducerName : "carouselProductReducer",
-                          labels : {
-                            productName : "Product Name2",
-                            productPrice: "Product Price",
-                            productId : "Id",
-                            title : "This is  product detail"
-                          },
-                          carouselProduct : {
-                            productName : "Hero Cycles",
-                            productImage : "<img src='https://images.apple.com/uk/pr/products/images/iPhone6_34FR_SpGry_iPhone6plus_34FL_SpGry_Homescreen_HERO.jpg' alt='product_image'/>",
-                            productId :  1 ,
-                            productPrice :  0,
-                            productLink : "<a href='google.com' />"    
-                            }
-
-                        }
-            } 
-        };
-  }else {
-     window.app = {
-         cartProductCombinedReducer: {
-            cartProductsReducer1: {
-                       reducerName : "cartProductReducer",
+  var canUseDOM = typeof window !== 'undefine d' && window.document && window.document.createElement;
+  if(!canUseDOM){
+        window.app = {
+          cartProductCombinedReducer: [
+                {
+                guid : "cartProductsReducer1" ,
+                reducerName : "cartProductReducer" ,
+                componentName : "ProductDetail",
+                data : {
                         labels : {
                           productName : "Product Name",
                           productPrice: "Product Price",
@@ -125,51 +52,122 @@
                           title : "This is  product detail"
                         },
                         cartProduct : {
-                            productName : "Hero Cycles",
-                            productImage : "<img src='https://images.apple.com/uk/pr/products/images/iPhone6_34FR_SpGry_iPhone6plus_34FL_SpGry_Homescreen_HERO.jpg' alt='product_image'/>",
-                            productId :  1 ,
-                            productPrice :  0,
-                            productLink : "google.com"                      
-                          }
+                          productName : "Hero Cycles",
+                          productImage : "<img src='https://images.apple.com/uk/pr/products/images/iPhone6_34FR_SpGry_iPhone6plus_34FL_SpGry_Homescreen_HERO.jpg' alt='product_image'/>",
+                          productId :  1 ,
+                          productPrice :  0,
+                          productLink : "<a href='google.com' />"    
+                        }
 
-                      }
-          } 
-     }
-
-     window.app3 = {
-                        reducerName : "carouselProductReducer",
+                  }
+              }],
+              carouselProductCombinedReducer: [
+                {
+                guid : "carouselProductsReducer1" ,
+                reducerName : "carouselProductReducer" ,
+                 componentName : "CarouselProduct",
+                data : {
                         labels : {
+                          productName : "Product Name",
                           productPrice: "Product Price",
-                          productId : "Id"
+                          productId : "Id",
+                          title : "This is  product detail"
                         },
                         carouselProduct : {
-                            productId :  1 ,
-                            productPrice :  0
-                          }
+                          productName : "Hero Cycles",
+                          productImage : "<img src='https://images.apple.com/uk/pr/products/images/iPhone6_34FR_SpGry_iPhone6plus_34FL_SpGry_Homescreen_HERO.jpg' alt='product_image'/>",
+                          productId :  1 ,
+                          productPrice :  0,
+                          productLink : "<a href='google.com' />"    
+                        }
+
+                  }
+              },
+              {
+                guid : "carouselProductsReducer3" ,
+                reducerName : "carouselProductReducer" , 
+                componentName : "CarouselProduct",                 
+                data : {
+                      labels : {
+                        productName : "Product Name",
+                        productPrice: "Product Price",
+                        productId : "Id",
+                        title : "This is carousel product detail"
+                      },
+                      carouselProduct : {
+                        productName : "Hero Cycles2",
+                        productImage : "<img src='https://images.apple.com/uk/pr/products/images/iPhone6_34FR_SpGry_iPhone6plus_34FL_SpGry_Homescreen_HERO.jpg' alt='product_image'/>",
+                        productId :  2 ,
+                        productPrice :  0,
+                        productLink : "<a href='google.com' />"    
+                      }
+
+                  }
+              }]
+              
+        }
+
+  }else {
+    //  window.app = {
+    //      cartProductCombinedReducer: {
+    //         cartProductsReducer1: {
+    //                    reducerName : "cartProductReducer",
+    //                     labels : {
+    //                       productName : "Product Name",
+    //                       productPrice: "Product Price",
+    //                       productId : "Id",
+    //                       title : "This is  product detail"
+    //                     },
+    //                     cartProduct : {
+    //                         productName : "Hero Cycles",
+    //                         productImage : "<img src='https://images.apple.com/uk/pr/products/images/iPhone6_34FR_SpGry_iPhone6plus_34FL_SpGry_Homescreen_HERO.jpg' alt='product_image'/>",
+    //                         productId :  1 ,
+    //                         productPrice :  0,
+    //                         productLink : "google.com"                      
+    //                       }
+
+    //                   }
+    //       } 
+    //  }
+
+     window.app3 = {
+                        labels : {
+                          productName : "Product Name",
+                          productPrice: "Product Price",
+                          productId : "Id",
+                          title : "This is  product detail"
+                        },
+                        carouselProduct : {
+                          productName : "Hero Cycles",
+                          productImage : "<img src='https://images.apple.com/uk/pr/products/images/iPhone6_34FR_SpGry_iPhone6plus_34FL_SpGry_Homescreen_HERO.jpg' alt='product_image'/>",
+                          productId :  1 ,
+                          productPrice :  0,
+                          productLink : "<a href='google.com' />"    
+                        }
                 }
      
 
-      window.app1 = {
-         cartProductCombinedReducer: {
-            cartProductsReducer2: {
-                      reducerName : "cartProductReducer",           
-                        labels : {
-                          productName : "Product Name1",
-                          productPrice: "Product Price1",
-                          productId : "Id",
-                          title : "This is  product detail1"
-                        },
-                        cartProduct : {
-                            productName : "Hero Cycles1",
-                            productImage : "<img src='https://codropspz-tympanus.netdna-ssl.com/codrops/wp-content/uploads/2010/05/splash.jpg' alt='product_image'/>",
-                            productId :  1 ,
-                            productPrice :  0,
-                            productLink : "google.com"                      
-                          }
+    //   window.app1 = {
+    //      cartProductCombinedReducer: {
+    //         cartProductsReducer2: {
+    //                   reducerName : "cartProductReducer",           
+    //                     labels : {
+    //                       productName : "Product Name1",
+    //                       productPrice: "Product Price1",
+    //                       productId : "Id",
+    //                       title : "This is  product detail1"
+    //                     },
+    //                     cartProduct : {
+    //                         productName : "Hero Cycles1",
+    //                         productImage : "<img src='https://codropspz-tympanus.netdna-ssl.com/codrops/wp-content/uploads/2010/05/splash.jpg' alt='product_image'/>",
+    //                         productId :  1 ,
+    //                         productPrice :  0,
+    //                         productLink : "google.com"                      
+    //                       }
 
-                      }
-          }
-     }
+    //                   }
+    //       }
+    //  }
   }
 
         window.staticComps = {

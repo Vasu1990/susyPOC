@@ -2340,7 +2340,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 var canUseDOM = exports.canUseDOM = function canUseDOM() {
     var isClitent = typeof window !== 'undefined' && window.document && window.document.createElement;
-    return isClitent;
+    return false;
 };
 
 var simulateServer = exports.simulateServer = function simulateServer() {
@@ -5180,23 +5180,16 @@ function createGlobalStore() {
   var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   var store = void 0;
-  var storeData = (0, _Utility.canUseDOM)() ? window.app : data;
-  var mainReducer;
+  var reducer;
 
-  if ((0, _Utility.canUseDOM)()) {
-    //   for client
-    if (window.store) {
-      store = window.store;
-    } else {
-      //set initial data depending on client or server
-      mainReducer = (0, _main.creteMainReducer)(storeData);
-      window.store = (0, _redux.createStore)(mainReducer, window.app, (0, _redux.applyMiddleware)(_reduxThunk2.default));
-      store = window.store;
-    }
+  if (window.store) {
+    store = window.store;
   } else {
-    // for server  
-    mainReducer = (0, _main.creteMainReducer)(storeData);
-    store = (0, _redux.createStore)(mainReducer, data, (0, _redux.applyMiddleware)(_reduxThunk2.default));
+    //set initial data depending on client or server
+    reducer = (0, _main.creteMainReducer)(window.app);
+    console.log(reducer, "reducer");
+    window.store = (0, _redux.createStore)(reducer.mainReducer, reducer.reducerState, (0, _redux.applyMiddleware)(_reduxThunk2.default));
+    store = window.store;
   }
 
   return store;
@@ -7885,7 +7878,7 @@ var CarouselProduct = function (_Component) {
                             _react2.default.createElement(
                                 "h1",
                                 null,
-                                "This is a smart component fetching new produc through ajax on every click"
+                                "This is a redux free comp"
                             ),
                             _react2.default.createElement("h2", { dangerouslySetInnerHTML: { __html: this.props.data.labels.title } }),
                             _react2.default.createElement(
@@ -8083,15 +8076,20 @@ var creteMainReducer = exports.creteMainReducer = function creteMainReducer(stor
 
     // 1st loop to find parent reducer
     var combinedReducerObject = {};
+    var combinedInitailState = {};
+    var reducer = {
+        mainReducer: {},
+        reducerState: {}
+    };
 
-    for (var parentReducer in storeData) {
+    var _loop = function _loop() {
         var reducerObj = {};
+        var initialState = {};
         var reducerFunction = void 0;
 
         // 2nd loop to get rach GUID of a reducer to make multiple instances
-        for (var reducerGUID in storeData[parentReducer]) {
-
-            switch (storeData[parentReducer][reducerGUID].reducerName) {
+        storeData[components].forEach(function (componentInstance) {
+            switch (componentInstance.reducerName) {
                 //find matching reducer to select the reducer function
                 case "cartProductReducer":
                     reducerFunction = _cartProduct2.default;
@@ -8103,18 +8101,28 @@ var creteMainReducer = exports.creteMainReducer = function creteMainReducer(stor
                 default:
                     reducerFunction = function reducerFunction() {};
             }
-
             //execute the reducer function with specific GUID as namespace for a reducer
-            reducerObj[reducerGUID] = reducerFunction(reducerGUID);
-        }
+            reducerObj[componentInstance.guid] = reducerFunction(componentInstance.guid);
+            initialState[componentInstance.guid] = componentInstance.data;
+        }, undefined);
+
         console.log(reducerObj, "reducer obj");
 
         //add it to main reducer object with key as parent reducer name and value of combine reducers
-        combinedReducerObject[parentReducer] = (0, _redux.combineReducers)(reducerObj);
+        combinedReducerObject[components] = (0, _redux.combineReducers)(reducerObj);
+        combinedInitailState[components] = initialState;
+
+        console.log(combinedInitailState, "final state");
         console.log(combinedReducerObject, "final struct");
+    };
+
+    for (var components in storeData) {
+        _loop();
     }
     //combine all main reducers
-    return (0, _redux.combineReducers)(combinedReducerObject);
+    reducer.mainReducer = (0, _redux.combineReducers)(combinedReducerObject);
+    reducer.reducerState = combinedInitailState;
+    return reducer;
 };
 
 // reference code
@@ -12523,34 +12531,44 @@ if ((0, _Utility.canUseDOM)()) {
 	var mappedData = _extends({}, window.app);
 
 	if (mappedData && mappedData.cartProductCombinedReducer) {
-		for (var reducerKey in window.app.cartProductCombinedReducer) {
-			_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, { reducerNamespace: reducerKey }), document.getElementById(reducerKey));
-		}
+		window.app.cartProductCombinedReducer.forEach(function (component) {
+			_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, { reducerNamespace: component.guid }), document.getElementById(component.guid));
+		}, undefined);
 	}
 
 	if (mappedData && mappedData.carouselProductCombinedReducer) {
-		for (var _reducerKey in window.app.carouselProductCombinedReducer) {
-			_reactDom2.default.render(_react2.default.createElement(serverComponents.CarouselProduct, { reducerNamespace: _reducerKey }), document.getElementById(_reducerKey));
-		}
+		window.app.carouselProductCombinedReducer.forEach(function (component) {
+			_reactDom2.default.render(_react2.default.createElement(serverComponents.CarouselProduct, { reducerNamespace: component.guid }), document.getElementById(component.guid));
+		}, undefined);
 	}
 
-	if (document.getElementById("google-map") !== null) {
-		_reactDom2.default.render(_react2.default.createElement(serverComponents.GoogleMapComp, null), document.getElementById("google-map"));
-	}
+	// if(document.getElementById("google-map") !== null) {
+	// 		ReactDOM.render(
+	// 			<serverComponents.GoogleMapComp /> ,
+	// 		document.getElementById("google-map")); 
 
-	if (window.staticComps && window.staticComps.dumbComponent) {
-		var staticCompData = window.staticComps.dumbComponent;
-		for (var _reducerKey2 in staticCompData) {
-			console.log(staticCompData, _reducerKey2);
+	// }
 
-			_reactDom2.default.render(_react2.default.createElement(serverComponents.DumbComponent, { name: staticCompData[_reducerKey2].componentData.name }), document.getElementById(_reducerKey2));
-		}
-	}
+
+	// if(window.staticComps  && window.staticComps.dumbComponent) {
+	// 	var staticCompData = window.staticComps.dumbComponent;
+	// 	for(let reducerKey in staticCompData) {
+	// 			console.log(staticCompData,  reducerKey);
+
+	// 		ReactDOM.render(
+	// 			<serverComponents.DumbComponent name={staticCompData[reducerKey].componentData.name}/>,
+	// 		document.getElementById(reducerKey)); 
+	// 	}
+	// }	
 } else {
 	if ((0, _Utility.simulateServer)()) {
-		_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, { data: window.app }), document.getElementById("cartProductsReducer1"));
+		// ReactDOM.render(
+		// 	<serverComponents.ProductDetail data={window.app} />,
+		// document.getElementById("cartProductsReducer1")); 
 
-		_reactDom2.default.render(_react2.default.createElement(serverComponents.ProductDetail, { data: window.app1 }), document.getElementById("cartProductsReducer2"));
+		// ReactDOM.render(
+		// 	<serverComponents.ProductDetail data={window.app1} />,
+		// document.getElementById("cartProductsReducer2")); 
 
 		_reactDom2.default.render(_react2.default.createElement(serverOnlyComponents.CarouselProdWrapper, { data: window.app3 }), document.getElementById("carouselProductsReducer3"));
 	}
@@ -13426,6 +13444,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var CarouselProdWrapper = exports.CarouselProdWrapper = (0, _reactRedux.connect)(
 //map state to props
 function (state, ownProps) {
+    console.log(state);
     return {
         data: state.carouselProductCombinedReducer[ownProps.reducerNamespace]
     };
@@ -13565,11 +13584,11 @@ var CartProduct = function (_Component) {
                                 null,
                                 'This is a smart component fetching new produc through ajax on every click'
                             ),
-                            _react2.default.createElement('h2', { dangerouslySetInnerHTML: { __html: this.props.labels.title } }),
+                            _react2.default.createElement('h2', { dangerouslySetInnerHTML: { __html: this.props.data.labels.title } }),
                             _react2.default.createElement(
                                 'dl',
                                 { className: 'cart-products' },
-                                this.props.productDetail ? this.renderCartRows(this.props.productDetail, this.props.labels) : this.showNoProduts()
+                                this.props.data.cartProduct ? this.renderCartRows(this.props.data.cartProduct, this.props.data.labels) : this.showNoProduts()
                             ),
                             _react2.default.createElement(
                                 'button',
@@ -13589,10 +13608,9 @@ var CartProduct = function (_Component) {
 }(_react.Component);
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-    console.log(state, "product detail ownProps");
+    console.log(ownProps.reducerNamespace, "product detail ownProps");
     return {
-        productDetail: state.cartProductCombinedReducer[ownProps.reducerNamespace].cartProduct,
-        labels: state.cartProductCombinedReducer[ownProps.reducerNamespace].labels
+        data: state.cartProductCombinedReducer[ownProps.reducerNamespace]
     };
 };
 
@@ -13996,18 +14014,7 @@ var CarouselProductWrapper = function (_Component) {
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = CarouselProductWrapper.__proto__ || Object.getPrototypeOf(CarouselProductWrapper)).call.apply(_ref, [this].concat(args))), _this), _this.store = (0, _store.createGlobalStore)(_this.props.data), _this.getReducerNamespace = function () {
-            if ((0, _Utility.canUseDOM)()) {
-                _this.reducerNamespace = _this.props.reducerNamespace;
-            } else {
-                for (var guids in _this.props.data) {
-                    for (var guid in _this.props.data[guids]) {
-                        _this.namespace = guid;
-                    }
-                }
-            }
-            return _this.reducerNamespace;
-        }, _temp), _possibleConstructorReturn(_this, _ret);
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = CarouselProductWrapper.__proto__ || Object.getPrototypeOf(CarouselProductWrapper)).call.apply(_ref, [this].concat(args))), _this), _this.store = (0, _store.createGlobalStore)(), _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(CarouselProductWrapper, [{
@@ -14016,7 +14023,7 @@ var CarouselProductWrapper = function (_Component) {
             return _react2.default.createElement(
                 _reactRedux.Provider,
                 { store: this.store },
-                _react2.default.createElement(_wrapper.CarouselProdWrapper, { reducerNamespace: this.getReducerNamespace() })
+                _react2.default.createElement(_wrapper.CarouselProdWrapper, { reducerNamespace: this.props.reducerNamespace })
             );
         }
     }]);
@@ -14081,18 +14088,7 @@ var ProductDetailWrapper = function (_Component) {
                   args[_key] = arguments[_key];
             }
 
-            return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ProductDetailWrapper.__proto__ || Object.getPrototypeOf(ProductDetailWrapper)).call.apply(_ref, [this].concat(args))), _this), _this.store = (0, _store.createGlobalStore)(_this.props.data), _this.getReducerNamespace = function () {
-                  if ((0, _Utility.canUseDOM)()) {
-                        _this.namespace = _this.props.reducerNamespace;
-                  } else {
-                        for (var guids in _this.props.data) {
-                              for (var guid in _this.props.data[guids]) {
-                                    _this.namespace = guid;
-                              }
-                        }
-                  }
-                  return _this.namespace;
-            }, _temp), _possibleConstructorReturn(_this, _ret);
+            return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ProductDetailWrapper.__proto__ || Object.getPrototypeOf(ProductDetailWrapper)).call.apply(_ref, [this].concat(args))), _this), _this.store = (0, _store.createGlobalStore)(), _temp), _possibleConstructorReturn(_this, _ret);
       }
 
       _createClass(ProductDetailWrapper, [{
@@ -14101,7 +14097,7 @@ var ProductDetailWrapper = function (_Component) {
                   return _react2.default.createElement(
                         _reactRedux.Provider,
                         { store: this.store },
-                        _react2.default.createElement(_CartProduct2.default, { reducerNamespace: this.getReducerNamespace() })
+                        _react2.default.createElement(_CartProduct2.default, { reducerNamespace: this.props.reducerNamespace })
                   );
             }
       }]);
@@ -14119,7 +14115,7 @@ exports.default = ProductDetailWrapper;
 
 
 Object.defineProperty(exports, "__esModule", {
-   value: true
+  value: true
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -14131,29 +14127,35 @@ var _carouselProductActions = __webpack_require__(69);
 var _Utility = __webpack_require__(17);
 
 var carouselProductReducer = function carouselProductReducer() {
-   var namespace = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "carouselProductReducer";
-   return function () {
-      var carouselProductData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-         labels: {
-            productPrice: "",
-            productId: ""
-         },
-         carouselProduct: {
-            productId: 0,
-            productPrice: 0
-         } };
-      var action = arguments[1];
+  var namespace = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "carouselProductReducer";
+  return function () {
+    var carouselProductData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+      labels: {
+        productName: "",
+        productImage: "",
+        productId: "",
+        productPrice: "",
+        productLink: ""
+      },
+      carouselProduct: {
+        productName: "",
+        productImage: "",
+        productId: 1,
+        productPrice: 0,
+        productLink: ""
+      } };
+    var action = arguments[1];
 
-      switch (action.type) {
+    switch (action.type) {
 
-         case '' + namespace + _carouselProductActions.LOAD_PRODUCT:
-            carouselProductData.carouselProduct = action.payload;
-            return _extends({}, carouselProductData);
+      case '' + namespace + _carouselProductActions.LOAD_PRODUCT:
+        carouselProductData.carouselProduct = action.payload;
+        return _extends({}, carouselProductData);
 
-         default:
-            return _extends({}, carouselProductData);
-      }
-   };
+      default:
+        return _extends({}, carouselProductData);
+    }
+  };
 };
 
 exports.default = carouselProductReducer;

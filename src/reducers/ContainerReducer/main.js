@@ -8,15 +8,21 @@ export const creteMainReducer = (storeData) => {
 
     // 1st loop to find parent reducer
     var combinedReducerObject = {};
-    
-    for(var parentReducer in storeData) {
+    var combinedInitailState = {};
+    var reducer = {
+        mainReducer : {},
+        reducerState : {}
+    }
+
+
+    for(var components in storeData) {
       let reducerObj = {};
+      let initialState = {};
       let reducerFunction;
 
-    // 2nd loop to get rach GUID of a reducer to make multiple instances
-          for(var reducerGUID in storeData[parentReducer]) {
-
-                switch(storeData[parentReducer][reducerGUID].reducerName) {
+// 2nd loop to get rach GUID of a reducer to make multiple instances
+      storeData[components].forEach(function(componentInstance) {
+           switch(componentInstance.reducerName) {
                     //find matching reducer to select the reducer function
                     case "cartProductReducer" :
                         reducerFunction = cartProductReducer;
@@ -28,18 +34,25 @@ export const creteMainReducer = (storeData) => {
                         default : 
                         reducerFunction = function(){};
                 }
+                 //execute the reducer function with specific GUID as namespace for a reducer
+            reducerObj[componentInstance.guid] = reducerFunction(componentInstance.guid);
+            initialState[componentInstance.guid] = componentInstance.data;
+      }, this);
 
-            //execute the reducer function with specific GUID as namespace for a reducer
-            reducerObj[reducerGUID] = reducerFunction(reducerGUID);
-        }
+
           console.log(reducerObj ,"reducer obj");
 
          //add it to main reducer object with key as parent reducer name and value of combine reducers
-           combinedReducerObject[parentReducer] =   combineReducers(reducerObj);
+           combinedReducerObject[components] =   combineReducers(reducerObj);
+           combinedInitailState[components] =  initialState;
+
+           console.log(combinedInitailState , "final state");
            console.log(combinedReducerObject , "final struct");
     }
       //combine all main reducers
-        return combineReducers(combinedReducerObject);
+        reducer.mainReducer = combineReducers(combinedReducerObject);
+        reducer.reducerState = combinedInitailState;
+        return reducer;
 }
 
 

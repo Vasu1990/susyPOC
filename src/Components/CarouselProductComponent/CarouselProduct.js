@@ -53,7 +53,7 @@ export default class CarouselProduct extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-12">
-                            <h1>This is a smart component fetching new produc through ajax on every click</h1>
+                            <h1>This is a redux free comp</h1>
                             <h2 dangerouslySetInnerHTML={{ __html: this.props.data.labels.title }}></h2>
                             <dl className="cart-products">
                                 {this.props.data? 

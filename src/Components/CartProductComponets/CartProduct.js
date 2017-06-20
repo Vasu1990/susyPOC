@@ -61,10 +61,10 @@ class CartProduct extends Component {
                     <div className="row">
                         <div className="col-sm-12">
                             <h1>This is a smart component fetching new produc through ajax on every click</h1>
-                            <h2 dangerouslySetInnerHTML={{ __html: this.props.labels.title }}></h2>
+                            <h2 dangerouslySetInnerHTML={{ __html: this.props.data.labels.title }}></h2>
                             <dl className="cart-products">
-                                {this.props.productDetail? 
-                                    this.renderCartRows(this.props.productDetail , this.props.labels) : 
+                                {this.props.data.cartProduct? 
+                                    this.renderCartRows(this.props.data.cartProduct , this.props.data.labels) : 
                                     this.showNoProduts()
                                 }
                             </dl>
@@ -79,10 +79,9 @@ class CartProduct extends Component {
 
 
 const mapStateToProps = (state , ownProps) => {
-    console.log(state , "product detail ownProps");
+    console.log(ownProps.reducerNamespace , "product detail ownProps");
         return {
-        productDetail: state.cartProductCombinedReducer[ownProps.reducerNamespace].cartProduct,
-        labels: state.cartProductCombinedReducer[ownProps.reducerNamespace].labels
+        data: state.cartProductCombinedReducer[ownProps.reducerNamespace]
     };
 };
 
