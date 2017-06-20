@@ -4,11 +4,19 @@ import React, { Component } from 'react';
 export default class CarouselProduct extends Component {
     renderCartRows = (product ,labels) => {
             return (
-                <dt className="carousel-product" key={product.productId}>
+               <dt className="cart-product" key={product.productId}>
+                    <strong dangerouslySetInnerHTML={{ __html: product.productImage}}></strong>
+                    Link
+                    <strong dangerouslySetInnerHTML={{ __html: product.productLink}}></strong>
+                
                     <ul>
                         <li><strong dangerouslySetInnerHTML={{ __html: labels.productId }}></strong>
                              <label dangerouslySetInnerHTML={{ __html: product.productId }}></label>    
                          </li>
+                        <li>
+                            <strong>{labels.productName}</strong> 
+                            <label dangerouslySetInnerHTML={{ __html: product.productName }}></label> 
+                        </li>
                         <li>
                             <strong dangerouslySetInnerHTML={{ __html: labels.productPrice }}></strong> 
                             <label dangerouslySetInnerHTML={{ __html: product.productPrice }}></label>      

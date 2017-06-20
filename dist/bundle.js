@@ -7815,7 +7815,10 @@ var CarouselProduct = function (_Component) {
         return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = CarouselProduct.__proto__ || Object.getPrototypeOf(CarouselProduct)).call.apply(_ref, [this].concat(args))), _this), _this.renderCartRows = function (product, labels) {
             return _react2.default.createElement(
                 "dt",
-                { className: "carousel-product", key: product.productId },
+                { className: "cart-product", key: product.productId },
+                _react2.default.createElement("strong", { dangerouslySetInnerHTML: { __html: product.productImage } }),
+                "Link",
+                _react2.default.createElement("strong", { dangerouslySetInnerHTML: { __html: product.productLink } }),
                 _react2.default.createElement(
                     "ul",
                     null,
@@ -7824,6 +7827,16 @@ var CarouselProduct = function (_Component) {
                         null,
                         _react2.default.createElement("strong", { dangerouslySetInnerHTML: { __html: labels.productId } }),
                         _react2.default.createElement("label", { dangerouslySetInnerHTML: { __html: product.productId } })
+                    ),
+                    _react2.default.createElement(
+                        "li",
+                        null,
+                        _react2.default.createElement(
+                            "strong",
+                            null,
+                            labels.productName
+                        ),
+                        _react2.default.createElement("label", { dangerouslySetInnerHTML: { __html: product.productName } })
                     ),
                     _react2.default.createElement(
                         "li",
