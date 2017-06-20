@@ -14,7 +14,7 @@ export default class CarouselProduct extends Component {
                              <label dangerouslySetInnerHTML={{ __html: product.productId }}></label>    
                          </li>
                         <li>
-                            <strong>{labels.productName}</strong> 
+                            <strong dangerouslySetInnerHTML={{ __html: labels.productName }}></strong> 
                             <label dangerouslySetInnerHTML={{ __html: product.productName }}></label> 
                         </li>
                         <li>
