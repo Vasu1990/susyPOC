@@ -39,7 +39,14 @@ if(canUseDOM()) {
 	// 	var staticCompData = window.staticComps.dumbComponent;
 	// 	for(let reducerKey in staticCompData) {
 	// 			console.log(staticCompData,  reducerKey);
-		
+			
+	let id = undefined;
+	for(let i =0; i<window.reactComponents.map.length; i++) {
+	
+	ReactDOM.render(
+		<serverOnlyComponents.Map data={window.reactComponents.map[i].data}/>,
+	document.getElementById(window.reactComponents.map[i]["guid"])); 
+	} 
 		
 	// }	
 
