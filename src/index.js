@@ -39,11 +39,8 @@ if(canUseDOM()) {
 	// 	var staticCompData = window.staticComps.dumbComponent;
 	// 	for(let reducerKey in staticCompData) {
 	// 			console.log(staticCompData,  reducerKey);
-			
-	// 		ReactDOM.render(
-	// 			<serverComponents.DumbComponent name={staticCompData[reducerKey].componentData.name}/>,
-	// 		document.getElementById(reducerKey)); 
-	// 	}
+		
+		
 	// }	
 
 }
@@ -60,6 +57,10 @@ if(canUseDOM()) {
 
 			ReactDOM.render(
 				<serverOnlyComponents.CarouselProdWrapper data={window.app3}/>,
-			document.getElementById("carouselProductsReducer3")); 
+			document.getElementById("carouselProductsReducer3"));
+
+			ReactDOM.render(
+				<serverOnlyComponents.Map data={window.reactComponents.map.data}/>,
+			document.getElementById("map"));  
 	}
 }	

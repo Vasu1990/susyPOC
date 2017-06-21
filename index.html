@@ -1,199 +1,256 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    
-    <!--<link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">-->
 
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>CarParts - Responsive Ecommerce Template</title>
-        <meta name="description" content="CarParts - A Responsive eCommerce Template specially for car and electronic parts eCommerce site">
+<head>
+  <meta charset="utf-8">
 
-        <!-- Custom CSS -->
-        <!--<link rel="stylesheet" href="assets/css/style.css">-->
-        <link rel="stylesheet" href="public/assets/css/main.css">
+  <!--<link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">-->
 
-    <title>React App</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CarParts - Responsive Ecommerce Template</title>
+  <meta name="description" content="CarParts - A Responsive eCommerce Template specially for car and electronic parts eCommerce site">
 
-  </head>
-  <body>
-     
-    <!--react component-->
-    <div data-component="product-detail" id="cartProductsReducer1"></div>
-    <div data-component="product-detail" id="cartProductsReducer2"></div>
-    <div data-component="product-detail" id="cartProductsReducer3"></div>
-    <div data-component="product-detail" id="cartProductsReducer4"></div>
+  <!-- Custom CSS -->
+  <!--<link rel="stylesheet" href="assets/css/style.css">-->
+  <link rel="stylesheet" href="public/assets/css/main.css">
 
-    <div data-component="product-detail" id="cartProductsReducer"></div>
-    <div data-component="carousel-product" id="carouselProductsReducer1"></div>
+  <title>React App</title>
 
-    <div data-component="carousel-product" id="carouselProductsReducer3"></div>
-    
-     <!--react dumb component-->
-    <div data-component="dumb-component" id="dumbComponentPlace1"></div>
-<div data-component="dumb-component" id="dumbComponentPlace2"></div>
+</head>
 
-<div data-component="dumb-component" id="google-map"></div>
-<script>
-  var canUseDOM = typeof window !== 'undefine d' && window.document && window.document.createElement;
-  if(!canUseDOM){
-        window.app = {
-          cartProductCombinedReducer: [
-                {
-                guid : "cartProductsReducer1" ,
-                reducerName : "cartProductReducer" ,
-                componentName : "ProductDetail",
-                data : {
-                        labels : {
-                          productName : "Product Name",
-                          productPrice: "Product Price",
-                          productId : "Id",
-                          title : "This is  product detail"
-                        },
-                        cartProduct : {
-                          productName : "Hero Cycles",
-                          productImage : "<img src='https://images.apple.com/uk/pr/products/images/iPhone6_34FR_SpGry_iPhone6plus_34FL_SpGry_Homescreen_HERO.jpg' alt='product_image'/>",
-                          productId :  1 ,
-                          productPrice :  0,
-                          productLink : "<a href='google.com' />"    
-                        }
+<body>
 
-                  }
-              }],
-              carouselProductCombinedReducer: [
-                {
-                guid : "carouselProductsReducer1" ,
-                reducerName : "carouselProductReducer" ,
-                 componentName : "CarouselProduct",
-                data : {
-                        labels : {
-                          productName : "Product Name",
-                          productPrice: "Product Price",
-                          productId : "Id",
-                          title : "This is  product detail"
-                        },
-                        carouselProduct : {
-                          productName : "Hero Cycles",
-                          productImage : "<img src='https://images.apple.com/uk/pr/products/images/iPhone6_34FR_SpGry_iPhone6plus_34FL_SpGry_Homescreen_HERO.jpg' alt='product_image'/>",
-                          productId :  1 ,
-                          productPrice :  0,
-                          productLink : "<a href='google.com' />"    
-                        }
+  <!--react component-->
+  <div data-component="product-detail" id="cartProductsReducer1"></div>
+  <div data-component="product-detail" id="cartProductsReducer2"></div>
+  <div data-component="product-detail" id="cartProductsReducer3"></div>
+  <div data-component="product-detail" id="cartProductsReducer4"></div>
 
-                  }
+  <div data-component="product-detail" id="cartProductsReducer"></div>
+  <div data-component="carousel-product" id="carouselProductsReducer1"></div>
+
+  <div data-component="carousel-product" id="carouselProductsReducer3"></div>
+
+  <!--react dumb component-->
+  <div data-component="dumb-component" id="dumbComponentPlace1"></div>
+  <div data-component="dumb-component" id="dumbComponentPlace2"></div>
+
+  <div data-component="dumb-component" id="google-map"></div>
+  <div data-component="dumb-component" id="map"></div>
+  <script>
+    var canUseDOM = typeof window !== 'undefine d' && window.document && window.document.createElement;
+    if (canUseDOM) {
+      window.app = {
+        cartProductCombinedReducer: [
+          {
+            guid: "cartProductsReducer1",
+            reducerName: "cartProductReducer",
+            componentName: "ProductDetail",
+            data: {
+              labels: {
+                productName: "Product Name",
+                productPrice: "Product Price",
+                productId: "Id",
+                title: "This is  product detail"
               },
-              {
-                guid : "carouselProductsReducer3" ,
-                reducerName : "carouselProductReducer" , 
-                componentName : "CarouselProduct",                 
-                data : {
-                      labels : {
-                        productName : "Product Name",
-                        productPrice: "Product Price",
-                        productId : "Id",
-                        title : "This is carousel product detail"
-                      },
-                      carouselProduct : {
-                        productName : "Hero Cycles2",
-                        productImage : "<img src='https://images.apple.com/uk/pr/products/images/iPhone6_34FR_SpGry_iPhone6plus_34FL_SpGry_Homescreen_HERO.jpg' alt='product_image'/>",
-                        productId :  2 ,
-                        productPrice :  0,
-                        productLink : "<a href='google.com' />"    
-                      }
-
-                  }
-              }]
-              
-        }
-
-  }else {
-    //  window.app = {
-    //      cartProductCombinedReducer: {
-    //         cartProductsReducer1: {
-    //                    reducerName : "cartProductReducer",
-    //                     labels : {
-    //                       productName : "Product Name",
-    //                       productPrice: "Product Price",
-    //                       productId : "Id",
-    //                       title : "This is  product detail"
-    //                     },
-    //                     cartProduct : {
-    //                         productName : "Hero Cycles",
-    //                         productImage : "<img src='https://images.apple.com/uk/pr/products/images/iPhone6_34FR_SpGry_iPhone6plus_34FL_SpGry_Homescreen_HERO.jpg' alt='product_image'/>",
-    //                         productId :  1 ,
-    //                         productPrice :  0,
-    //                         productLink : "google.com"                      
-    //                       }
-
-    //                   }
-    //       } 
-    //  }
-
-     window.app3 = {
-                        labels : {
-                          productName : "Product Name",
-                          productPrice: "Product Price",
-                          productId : "Id",
-                          title : "This is  product detail"
-                        },
-                        carouselProduct : {
-                          productName : "Hero Cycles",
-                          productImage : "<img src='https://images.apple.com/uk/pr/products/images/iPhone6_34FR_SpGry_iPhone6plus_34FL_SpGry_Homescreen_HERO.jpg' alt='product_image'/>",
-                          productId :  1 ,
-                          productPrice :  0,
-                          productLink : "<a href='google.com' />"    
-                        }
-                }
-     
-
-    //   window.app1 = {
-    //      cartProductCombinedReducer: {
-    //         cartProductsReducer2: {
-    //                   reducerName : "cartProductReducer",           
-    //                     labels : {
-    //                       productName : "Product Name1",
-    //                       productPrice: "Product Price1",
-    //                       productId : "Id",
-    //                       title : "This is  product detail1"
-    //                     },
-    //                     cartProduct : {
-    //                         productName : "Hero Cycles1",
-    //                         productImage : "<img src='https://codropspz-tympanus.netdna-ssl.com/codrops/wp-content/uploads/2010/05/splash.jpg' alt='product_image'/>",
-    //                         productId :  1 ,
-    //                         productPrice :  0,
-    //                         productLink : "google.com"                      
-    //                       }
-
-    //                   }
-    //       }
-    //  }
-  }
-
-        window.staticComps = {
-           dumbComponent: {
-                dumbComponentPlace1 : {
-                  componentData : {
-                        name : "vasu"
-                  }
-                },
-                dumbComponentPlace2 : {
-                 componentData : {
-                        name : "nagpal"
-                  }
-                }
+              cartProduct: {
+                productName: "Hero Cycles",
+                productImage: "<img src='https://images.apple.com/uk/pr/products/images/iPhone6_34FR_SpGry_iPhone6plus_34FL_SpGry_Homescreen_HERO.jpg' alt='product_image'/>",
+                productId: 1,
+                productPrice: 0,
+                productLink: "<a href='google.com' />"
               }
+
+            }
+          }],
+        carouselProductCombinedReducer: [
+          {
+            guid: "carouselProductsReducer1",
+            reducerName: "carouselProductReducer",
+            componentName: "CarouselProduct",
+            data: {
+              labels: {
+                productName: "Product Name",
+                productPrice: "Product Price",
+                productId: "Id",
+                title: "This is  product detail"
+              },
+              carouselProduct: {
+                productName: "Hero Cycles",
+                productImage: "<img src='https://images.apple.com/uk/pr/products/images/iPhone6_34FR_SpGry_iPhone6plus_34FL_SpGry_Homescreen_HERO.jpg' alt='product_image'/>",
+                productId: 1,
+                productPrice: 0,
+                productLink: "<a href='google.com' />"
+              }
+
+            }
+          },
+          {
+            guid: "carouselProductsReducer3",
+            reducerName: "carouselProductReducer",
+            componentName: "CarouselProduct",
+            data: {
+              labels: {
+                productName: "Product Name",
+                productPrice: "Product Price",
+                productId: "Id",
+                title: "This is carousel product detail"
+              },
+              carouselProduct: {
+                productName: "Hero Cycles2",
+                productImage: "<img src='https://images.apple.com/uk/pr/products/images/iPhone6_34FR_SpGry_iPhone6plus_34FL_SpGry_Homescreen_HERO.jpg' alt='product_image'/>",
+                productId: 2,
+                productPrice: 0,
+                productLink: "<a href='google.com' />"
+              }
+
+            }
+          }]
+
+      }
+      window.reactComponents = {
+        "map": {
+          "data": {
+            "googleMap": {
+              "locations": [{
+                "name": "YWW",
+                "latitude": 54,
+                "longitude": 55,
+                "isDefault": true
+              }, {
+                "name": "FWW",
+                "latitude": 54,
+                "longitude": 55,
+                "isDefault": true
+              }],
+              "centerLatitude": 11,
+              "centerLongitude": 11,
+              "radius": 110,
+              "zoom": 10
+            },
+            "labels": {
+              "buttonText": "hello",
+              "dropDownLabel": "hello"
+            }
+          }
         }
+      }
 
+    } else {
+      //  window.app = {
+      //      cartProductCombinedReducer: {
+      //         cartProductsReducer1: {
+      //                    reducerName : "cartProductReducer",
+      //                     labels : {
+      //                       productName : "Product Name",
+      //                       productPrice: "Product Price",
+      //                       productId : "Id",
+      //                       title : "This is  product detail"
+      //                     },
+      //                     cartProduct : {
+      //                         productName : "Hero Cycles",
+      //                         productImage : "<img src='https://images.apple.com/uk/pr/products/images/iPhone6_34FR_SpGry_iPhone6plus_34FL_SpGry_Homescreen_HERO.jpg' alt='product_image'/>",
+      //                         productId :  1 ,
+      //                         productPrice :  0,
+      //                         productLink : "google.com"                      
+      //                       }
 
-        window.apiUrl = {
-          productDetail : "../../public/data/product-detail.json"
+      //                   }
+      //       } 
+      //  }
+
+      window.app3 = {
+        labels: {
+          productName: "Product Name",
+          productPrice: "Product Price",
+          productId: "Id",
+          title: "This is  product detail"
+        },
+        carouselProduct: {
+          productName: "Hero Cycles",
+          productImage: "<img src='https://images.apple.com/uk/pr/products/images/iPhone6_34FR_SpGry_iPhone6plus_34FL_SpGry_Homescreen_HERO.jpg' alt='product_image'/>",
+          productId: 1,
+          productPrice: 0,
+          productLink: "<a href='google.com' />"
         }
+      }
 
-        
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?sensor=SET_TO_TRUE_OR_FALSE"></script>
-<script src="dist/bundle.js"></script>
-  </body>
- 
+
+      //   window.app1 = {
+      //      cartProductCombinedReducer: {
+      //         cartProductsReducer2: {
+      //                   reducerName : "cartProductReducer",           
+      //                     labels : {
+      //                       productName : "Product Name1",
+      //                       productPrice: "Product Price1",
+      //                       productId : "Id",
+      //                       title : "This is  product detail1"
+      //                     },
+      //                     cartProduct : {
+      //                         productName : "Hero Cycles1",
+      //                         productImage : "<img src='https://codropspz-tympanus.netdna-ssl.com/codrops/wp-content/uploads/2010/05/splash.jpg' alt='product_image'/>",
+      //                         productId :  1 ,
+      //                         productPrice :  0,
+      //                         productLink : "google.com"                      
+      //                       }
+
+      //                   }
+      //       }
+      //  }
+    }
+
+    window.staticComps = {
+      dumbComponent: {
+        dumbComponentPlace1: {
+          componentData: {
+            name: "vasu"
+          }
+        },
+        dumbComponentPlace2: {
+          componentData: {
+            name: "nagpal"
+          }
+        }
+      }
+    }
+
+    window.reactComponents = {
+      "map": {
+        "data": {
+          "googleMap": {
+            "locations": [{
+              "name": "YWW",
+              "latitude": 54,
+              "longitude": 55,
+              "isDefault": true
+            }, {
+              "name": "FWW",
+              "latitude": 54,
+              "longitude": 55,
+              "isDefault": true
+            }],
+            "centerLatitude": 11,
+            "centerLongitude": 11,
+            "radius": 110,
+            "zoom": 10
+          },
+          "labels": {
+            "buttonText": "hello",
+            "dropDownLabel": "hello"
+          }
+        }
+      }
+    }
+
+
+    window.apiUrl = {
+      productDetail: "../../public/data/product-detail.json"
+    }
+
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?sensor=SET_TO_TRUE_OR_FALSE"></script>
+  <script src="dist/bundle.js"></script>
+</body>
+
 </html>
