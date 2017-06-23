@@ -1,37 +1,58 @@
 @import "~susy/sass/susy";
+
+//sparate file grids
 $susy: (
     flow: ltr, 
-    output: float,
-    math: fluid,
+    output: float,//float or isolate(https://css-tricks.com/build-web-layouts-easily-susy/)
+    math: fluid,//fluid: calculation in % , static in em 
     container: 900px,
-    container-position: center,
-    last-flow: to, 
-    columns: 12, 
-    gutters: 1/4,
-    gutter-position: inside,
-    global-box-sizing: content-box,
-    debug: (image: show, color: rgba(#66f, .25),
-    output: background,
-    toggle: top right)
+    container-position: center,//left/right
+    // last-flow: to, 
+    columns: 12, //size of columns
+    gutters: 1/4, //gutter w.r.t columns
+    gutter-position: inside,//padding bs
+    global-box-sizing: content-box,//why border box is applying
+    debug: (image: show, color: rgba(#66f, .25), toggle: top right)
+    //for non responsive
+   // container:auto,
+    // column-width
 );
 
+//or
+//$susy:layout(12 1 fluid float outside)
+
+
+//separate file layout
+
+//grids reference
+//https://www.youtube.com/watch?v=_jhAcB5vCmQ 18:30 to 30
+
+.header {
+    // @include full;
+      @include span(12 of 12);
+    background: blue; 
+    .title {
+        @include span(last 3);
+    }
+    .logo {
+        background: yellow;
+        @include span(1 of 12);
+    }
+}
+
 .wrapper {
-    @include container;
-    @include show-grid(overlay);
+    @include container;//or container(size)
     
     .sidebar {
-        @include span(12);
-        @include susy-breakpoint(720px ,12) {
-            @include span(3);
-        }
+        @include span(3 of 12);
     }
 
     .main-content {
         
-        @include span(9);
+        @include span(9 of 12);
 
         .other-content {
-            @include layout(2 0 float fluid);
+            //  @include layout(2 0 float fluid);
             .other-content-1 {
                 @include span(1 of 2);
                 background-color: lightgrey;
@@ -42,12 +63,9 @@ $susy: (
             }
         }
         .product {
-            @include span(3 of 9);
+            border: 1px solid black;
+            @include span(1 of 3);
         }   
     }
 
 }
-
-
-
-
